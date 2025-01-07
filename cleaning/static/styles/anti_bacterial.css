@@ -1,0 +1,229 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: auto;
+}
+
+/* Header */
+header {
+    background-color: #FFB300;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 150px;
+}
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: -40px;
+}   
+
+/* Logo and Title Container */
+.logo-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 120px;
+    margin-right: 15px;
+}
+
+.site-title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+}
+.profile-icon {
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    height: 50px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 20px;
+}
+/* Navigation styles */
+nav {
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    padding-top: 70px;
+    padding-left: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul.centered-menu {
+    list-style: none;
+    display: flex;
+}
+
+nav ul.centered-menu li {
+    margin: 0 10px;
+    margin-top: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.centered-menu li a:hover {
+    color: darkorange;
+}
+
+/* Hero Section Styling */
+.hero-section {
+    display: flex;
+    align-items: center;
+    background-color: #fabd30; /* Matches header color */
+    padding: 20px;
+    height: 540px; /* Adjust height as needed */
+}
+
+.hero-text {
+    flex: 1;
+    color: white;
+    padding-right: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hero-text ul li {
+    font-size: 50px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-text ul li::before {
+    content: "✔"; /* Checkmark */
+    color: white;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.hero-image-container {
+    flex: 1; /* Occupies half of the container */
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center; /* Centers the image vertically */
+}
+
+.hero-image {
+    max-width: 100%; /* Ensures it doesn't exceed its container width */
+    max-height: 200%; /* Ensures it doesn't exceed the section height */
+    border-radius: 10px; /* Optional for rounded corners */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+/* Section Titles */
+.section-subtitle {
+    color: black;
+    text-transform: uppercase;
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-left: 60px;
+}
+
+.section-title {
+    margin-top: 20px;
+    font-size: 60px;
+    font-weight: bold;
+    color: #D35400;
+    margin-bottom: 40px;
+    margin-left: 60px;
+}
+
+/* Services Grid */
+.services-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* Service Card Styling */
+.service-card {
+    display: flex;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s;
+    margin: 20px 60px; /* Spacing from the sides */
+}
+h3{
+    font-size: 30px;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image on the Left */
+.service-image-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%; /* Limits image container to 50% of card */
+}
+
+.service-image {
+    
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/* Text Content on the Right */
+.service-content {
+    flex: 1;
+    padding: 20px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50%; /* Limits content container to 50% of card */
+    text-align: left;
+}
+
+.service-content h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #D35400;
+}
+
+.service-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+

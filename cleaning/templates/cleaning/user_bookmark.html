@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Bookmarks</title>
+</head>
+<body>
+    <h1>My Bookmarked Services</h1>
+    <div class="bookmarks-list">
+        {% for bookmark in bookmarks %}
+            <div class="bookmark-card">
+                <img src="{{ bookmark.service.image.url }}" alt="{{ bookmark.service.name }}" />
+                <h3>{{ bookmark.service.name }}</h3>
+                <p>{{ bookmark.service.description }}</p>
+                <p>Booked on: {{ bookmark.date_booked|date:"F j, Y, g:i a" }}</p>
+            </div>
+        {% empty %}
+            <p>No bookmarks yet.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'user_services' %}">Back to Services</a>
+</body>
+</html>

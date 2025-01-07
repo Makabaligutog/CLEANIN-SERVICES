@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload New Service</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/admin_services.css' %}?100">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="Busy Bee Logo">
+                <h1 class="site-title">Sayago's Cleaning Services</h1>
+            </div>
+            <ul class="centered-menu">
+                <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+                <li><a href="{% url 'ad_services' %}">Services</a></li>
+                <li><a href="{% url 'ad_about' %}">About Us</a></li>
+                <li><a href="{% url 'ad_blog' %}">Blog</a></li>
+                <li>{{request.user.username}}</li>
+            </ul>
+        </nav>
+        <img src="{% static 'images/icon.jpg' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()">
+    </header>
+    
+    
+    <div class="container">
+        <h2 class="section-title">Upload a New Service</h2>
+
+        <!-- Admin service upload form -->
+        <form action="{% url 'upload_service' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Service Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="description">Service Description:</label>
+            <textarea id="description" name="description" required></textarea><br><br>
+            {% comment %} <label for="price">Service Price:</label>
+            <input type="number"  id="price" name="price" required><br><br> {% endcomment %}
+
+            <label for="image">Service Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required><br><br>
+
+            <input type="submit" value="Upload Service">
+        </form>
+    </div>
+    <!-- admin_services.html -->
+
+<!-- admin_services.html -->
+
+<section id="services" class="services-section">
+    <div class="container">
+        <h2 class="section-subtitle">Our Services</h2>
+        <h1 class="section-title">Service Management</h1>
+        <div class="services-grid">
+            {% for service in services %}
+                <div class="service-card">
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image">
+                    <div class="service-content">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        
+                        <a href="#" class="service-button">Learn More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+    }
+    
+    // Toggle Modal
+    function toggleModal() {
+        const modal = document.getElementById("bookingModal");
+        modal.style.display = modal.style.display === "block" ? "none" : "block";
+    }
+    
+    // Close Modal when clicking the 'x' or outside of the modal
+    document.getElementById("closeModal").onclick = function() {
+        toggleModal();
+    }
+    
+    
+</script>
+
+
+</body>
+</html>

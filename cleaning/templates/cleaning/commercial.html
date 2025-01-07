@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/car.css' %}?101">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                <li><a href="{% url 'u_home' %}">Home</a></li>
+                <li><a href="{% url 'user_services' %}">Services</a></li>
+                <li><a href="{% url 'user_about' %}">About Us</a></li>
+                <li><a href="{% url 'user_blog' %}">Blog</a></li>
+                <li>{{ request.user.username }}</li>
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Commercial Cleaning</h1>
+            <ul>
+                <li>Most Recommended by over 800 customers</li>
+                <li>Complete Package, Affordable Rates</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services8.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">Pamper Your Car
+
+            </h1>
+            <h2 class="section-subtitle">— 5-Step Car Detailing Process
+
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services8.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3>
+                <br>Get your vehicle looking new with ellaborate interior<br> detailing. Detailing a car interior involves a deep
+                <br>cleaning of the car’s cabin. Various materials, high-
+                <br>technology machines, and patented solutions have <br> been used on vehicle interiors to give it it’s revamped
+                <br>look and it’s new aroma. We also top that with (1)<br>super steam sterilization, (2) car powerwash, (3)
+                <br>deep shampooing of upholsteries, and (4)<br> antibacterial mist treatment disinfection to get your car at tiptop shape.<br></h3>                
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+    
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_services.css' %}?100">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header Navigation -->
+        <header>
+            <nav>
+                <div class="logo-title-container">
+                    <img src="{% static 'images/logo1.png' %}" class="logo" alt="Busy Bee Logo">
+                    <h1 class="site-title">Sayago's Cleaning Services</h1>
+                </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'u_home' %}">Home</a></li>
+                    <li><a href="{% url 'user_services' %}">Services</a></li>
+                    <li><a href="{% url 'user_about' %}">About Us</a></li>
+                    <li><a href="{% url 'user_blog' %}">Blog</a></li>
+                    <li>{{ request.user.username }}</li>
+                    <li><img src="{% static 'images/icon2.png' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()"></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+            <a href="{% url 'user_profile' %}">Profile</a>
+            <a href="{% url 'home' %}">Sign Out</a>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <img src="{% static 'images/noga.jpeg' %}" alt="Cleaning Service" class="hero-image">
+            <div class="hero-text">
+                <h1>Welcome to Sayago's Cleaning Services</h1>
+                <p>Experience Sayago's Cleaning Co.'s most rated deep cleaning process</p>
+            </div>
+        </div>
+                <!-- Services Section -->
+                <section id="services" class="services-section">
+                    <h2 class="section-subtitle">Our Services</h2>
+                    <h1 class="section-title">We've got what you need!</h1>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <img src="{% static 'images/services7.jpg' %}" alt="Residential Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Residential Cleaning</h3>
+                                <p>Expert cleaning for your home, covering every room to ensure a spotless, fresh living space.</p>
+                                <button class="book-now-btn" data-service="residential">Book Now</button>
+                                <button class="rate-now-btn"  data-service="residential">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services8.jpg' %}" alt="Commercial Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Commercial Cleaning</h3>
+                                <p>Professional cleaning services for offices, retail spaces, and other commercial properties to keep your work environment pristine.</p>
+                                <button class="book-now-btn" data-service="commercial">Book Now</button>
+                                <button class="rate-now-btn" data-service="commercial">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services9.jpg' %}" alt="Move-in/Move-out Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Move-in/Move-out Cleaning</h3>
+                                <p>Specialized cleaning services to make your transition in or out of a home seamless and stress-free.</p>
+                                <button class="book-now-btn" data-service="move_in_move_out">Book Now</button>
+                                <button class="rate-now-btn" data-service="move_in_move_out">Rate Now</button>
+
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <img src="{% static 'images/services0.jpg' %}" alt="Carpet Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Carpet Cleaning</h3>
+                                <p>Our carpet cleaning services refresh your carpets, removing dirt, stains, and allergens for a healthier home.</p>
+                                <button class="book-now-btn" data-service="carpet">Book Now</button>
+                                <button class="rate-now-btn" data-service="carpet">Rate Now</button>
+
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <img src="{% static 'images/services11.jpg' %}" alt="Window Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Window Cleaning</h3>
+                                <p>Efficient window cleaning services that leave your windows crystal clear and streak-free.</p>
+                                <button class="book-now-btn" data-service="window">Book Now</button>
+                                <button class="rate-now-btn" data-service="window">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services1.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">
+                            <div class="service-content">
+                                <h3>Anti-Bacterial Mist Treatment</h3>
+                                <p>Always best after deep cleaning service to complete the whole process with 360-degree cleaning. Best for killing germs and bacteria within the area. Bacteria that can cause you flu, asthma, and allergies.</p>
+                                <button class="book-now-btn" data-service="anti_bacterial">Book Now</button>
+                                <button class="rate-now-btn" data-service="anti_bacterial">Rate Now</button>
+
+                            </div>
+                        </div>
+
+                        <div class="service-card">
+                            <img src="{% static 'images/services2.jpg' %}" alt="Car Interior Detailing" class="service-image">
+                            <div class="service-content">
+                                <h3>Car Interior Detailing</h3>
+                                <p>Detailing a car interior involves a deep cleaning of the car's cabin. Various materials, high-technology machines, and patented solutions have been used on vehicle interiors to give it its revamped look and new aroma.</p>
+                                <button class="book-now-btn" data-service="car_interior">Book Now</button>
+                                <button class="rate-now-btn" data-service="car_interior">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services3.jpg' %}" alt="Deep Dry Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Deep Dry Cleaning</h3>
+                                <p>Keep your mattress/sofas clean, dry vacuumed, and scented all the time. Savor the comfort each time. Best for linen/leather sofa, mattress, and removal of dirt, mites, and residue on targeted areas.</p>
+                                <button class="book-now-btn" data-service="deep_dry">Book Now</button>
+                                <button class="rate-now-btn" data-service="deep_dry">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services4.jpg' %}" alt="Deep Home Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Deep Home Cleaning</h3>
+                                <p>In a nutshell, almost every nook and cranny of your home will get special attention with an extensive routine of deep cleaning, from sweeping, brooming, and vacuuming of floors, wiping of areas.</p>
+                                <button class="book-now-btn" data-service="deep_home">Book Now</button>
+                                <button class="rate-now-btn" data-service="deep_home">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services5.jpg' %}" alt="Deep Upholstery Shampooing" class="service-image">
+                            <div class="service-content">
+                                <h3>Deep Upholstery Shampooing</h3>
+                                <p>Don’t let the dirt cling to your sofas/mattresses. It’s time to shampoo those long-due stains and marks. Involves shampooing and application of effective and efficient cleaning solutions in targeted areas.</p>
+                                <button class="book-now-btn" data-service="deep_upholstery">Book Now</button>
+                                <button class="rate-now-btn" data-service="deep_upholstery">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services6.jpg' %}" alt="Superior Steam Sterilization" class="service-image">
+                            <div class="service-content">
+                                <h3>Superior Steam Sterilization</h3>
+                                <p>Pamper your home and fabrics with the most traditional way of removing stubborn dirt within cloth and even germs. It is very effective when bed bugs are on the surfaces of items and can be effective up to 3/4" into fabrics surfaces.</p>
+                                <button class="book-now-btn" data-service="sterilization">Book Now</button>
+                                <button class="rate-now-btn" data-service="sterilization">Rate Now</button>
+
+                            </div>
+                        </div>
+                        <div class="service-card">
+                            <img src="{% static 'images/services12.jpg' %}" alt="Eco-friendly Green Cleaning" class="service-image">
+                            <div class="service-content">
+                                <h3>Eco-friendly Green Cleaning</h3>
+                                <p>We use environmentally safe cleaning products to ensure your home is clean and healthy without harmful chemicals.</p>
+                                <button class="book-now-btn" data-service="eco-friendly">Book Now</button>
+                                <button class="rate-now-btn" data-service="eco-friendly">Rate Now</button>
+
+                            </div>
+                        </div>
+                    </div> 
+
+                    
+                </section>
+
+          <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h2 id="modalServiceTitle">Book Now</h2>
+            <form id="bookingForm" action="{% url 'submit_booking' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" id="cleaning_service" name="cleaning_service" value="">
+                <p><strong>Service Selected:</strong> <span id="selectedServiceName"></span></p>
+
+                <div class="form-group">
+                    <label for="first_name"><i class="fas fa-user"></i> First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name"><i class="fas fa-user"></i> Last Name:</label>
+                    <input type="text" id="last_name" name="last_name">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_number"><i class="fas fa-phone"></i> Contact Number:</label>
+                    <input type="text" id="contact_number" name="contact_number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="additional_info"><i class="fas fa-info-circle"></i> Additional Info:</label>
+                    <textarea id="additional_info" name="additional_info"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="booking_date"><i class="fas fa-calendar-alt"></i> Booking Date:</label>
+                    <input type="date" id="booking_date" name="booking_date" required>
+                </div>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+            </form>
+        </div>
+    </div>
+    {% comment %} rating section {% endcomment %}
+    <div class="wrapper">
+        <div id="ratingModal" class="modal">
+            <div class="modal-content">
+                <span id="closeRatingModal" class="close-btn">&times;</span>
+                <h2>Rate This Service</h2>
+                <form id="ratingForm" method="POST" action="{% url 'submit_rating' %}">
+                    {% csrf_token %}
+                    <input type="hidden" id="service" name="service" value="">
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" required>
+                        <label for="star5" class="fas fa-star"></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" class="fas fa-star"></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" class="fas fa-star"></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" class="fas fa-star"></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" class="fas fa-star"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback">Feedback:</label>
+                        <textarea id="feedback" name="feedback" required></textarea>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+                <div id="ratingSuccessMessage" class="success-message" style="display: none;">
+                    Thank you for rating!
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    <!-- Thank You Notification -->
+    <div class="thank-you-notification" id="thankYouNotification">
+        Thank you for your feedback!
+    </div>
+</div>
+
+<!-- Booking Modal Backdrop -->
+<div class="booking-modal-backdrop" id="modalBackdrop"></div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="confirmation-modal">
+            <div class="modal-content">
+                <h2>Are you sure you want to book this service?</h2>
+                <button id="confirmYes" class="confirm-btn">Yes</button>
+                <button id="confirmNo" class="cancel-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{% static 'scripts/jquery.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const rateNowButtons = document.querySelectorAll('.rate-now-btn');
+            const ratingModal = document.getElementById('ratingModal');
+            const closeRatingModal = document.getElementById('closeRatingModal');
+            const serviceInput = document.getElementById('service');
+            const ratingForm = document.getElementById('ratingForm');
+            const ratingSuccessMessage = document.getElementById('ratingSuccessMessage');
+
+            rateNowButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const serviceName = button.getAttribute('data-service');
+                    serviceInput.value = serviceName;
+                    ratingModal.style.display = 'block';
+                });
+            });
+
+            closeRatingModal.addEventListener('click', () => {
+                ratingModal.style.display = 'none';
+                ratingSuccessMessage.style.display = 'none'; // Hide success message on close
+            });
+
+            window.addEventListener('click', event => {
+                if (event.target === ratingModal) {
+                    ratingModal.style.display = 'none';
+                    ratingSuccessMessage.style.display = 'none'; // Hide success message on close
+                }
+            });
+
+            ratingForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(ratingForm);
+                try {
+                    const response = await fetch("{% url 'submit_rating' %}", {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        ratingSuccessMessage.style.display = 'block';
+                    } else {
+                        // Handle error (e.g., display an error message)
+                    }
+                } catch (error) {
+                    // Handle error (e.g., display an error message)
+                }
+            });
+        });
+        
+    document.addEventListener('DOMContentLoaded', () => {
+    const bookingModal = document.getElementById('bookingModal');
+    const closeModal = document.getElementById('closeModal');
+    const serviceInput = document.getElementById('cleaning_service');
+    const selectedServiceName = document.getElementById('selectedServiceName');
+    const bookNowButtons = document.querySelectorAll('.book-now-btn');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookedDatesGrid = document.getElementById('bookedDatesGrid');
+    
+
+    // Open modal and populate with service data
+    bookNowButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const serviceName = button.getAttribute('data-service');
+            const displayName = button.previousElementSibling.previousElementSibling.innerText;
+            serviceInput.value = serviceName;
+            selectedServiceName.textContent = displayName;
+            bookingModal.style.display = 'flex';
+        });
+    });
+
+    // Close modal when 'X' is clicked
+    closeModal.addEventListener('click', () => {
+        bookingModal.style.display = 'none';
+        clearMessages(); // Clear previous messages
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', event => { 
+        if (event.target === bookingModal) {
+            bookingModal.style.display = 'none';
+            clearMessages(); // Clear previous messages
+        }
+    });
+
+    // Handle form submission with AJAX
+    bookingForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(bookingForm);
+        try {
+            const response = await fetch("{% url 'submit_booking' %}", {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Update booked dates dynamically
+                updateBookedDates(data.booked_dates);
+
+                // Display success message
+                showSuccessMessage(data.success);
+
+                // Close the modal after a delay
+                setTimeout(() => {
+                    bookingModal.style.display = 'none';
+                    clearMessages(); // Clear success message after closing
+                }, 3000);
+            } else {
+                // Display error message
+                showErrorMessage(data.error);
+            }
+        } catch (error) {
+            showErrorMessage("An unexpected error occurred. Please try again later.");
+        }
+    });
+
+    // Function to update booked dates dynamically
+    function updateBookedDates(dates) {
+        bookedDatesGrid.innerHTML = ''; // Clear current dates
+
+        if (dates.length === 0) {
+            const noDatesElement = document.createElement('p');
+            noDatesElement.textContent = "No dates have been booked yet.";
+            bookedDatesGrid.appendChild(noDatesElement);
+        } else {
+            dates.forEach(date => {
+                const dateElement = document.createElement('div');
+                dateElement.classList.add('booked-date');
+                dateElement.textContent = date;
+                bookedDatesGrid.appendChild(dateElement);
+            });
+        }
+    }
+
+    // Function to display success messages
+    function showSuccessMessage(message) {
+        clearMessages();
+        const successMessageElement = document.createElement('p');
+        successMessageElement.style.color = 'green';
+        successMessageElement.textContent = message;
+        successMessageElement.classList.add('success-message');
+        bookingModal.querySelector('.modal-content').appendChild(successMessageElement);
+    }
+
+    // Function to display error messages
+    function showErrorMessage(message) {
+        clearMessages();
+        const errorMessageElement = document.createElement('p');
+        errorMessageElement.style.color = 'red';
+        errorMessageElement.textContent = message;
+        errorMessageElement.classList.add('error-message');
+        bookingModal.querySelector('.modal-content').appendChild(errorMessageElement);
+    }
+
+    // Function to clear messages (error or success)
+    function clearMessages() {
+        const modalContent = bookingModal.querySelector('.modal-content');
+        const existingMessages = modalContent.querySelectorAll('.error-message, .success-message');
+        existingMessages.forEach(msg => msg.remove());
+    }
+    function submitBooking() {
+        const bookingData = {
+            cleaning_service: document.getElementById("cleaning_service").value,
+            first_name: document.getElementById("first_name").value,
+            last_name: document.getElementById("last_name").value,
+            contact_number: document.getElementById("contact_number").value,
+            address: document.getElementById("address").value,
+            additional_info: document.getElementById("additional_info").value,
+            booking_date: document.getElementById("booking_date").value,
+            confirm_booking: 'false', // Initially false
+        };
+    
+        fetch('/submit-booking/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken(), // Ensure CSRF token is included
+            },
+            body: JSON.stringify(bookingData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                // Show confirmation dialog
+                showConfirmationDialog(data.details);
+            } else if (data.error) {
+                // Show error message
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    // Open modal and populate with service data
+    bookNowButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const serviceName = button.getAttribute('data-service');
+            const displayName = button.previousElementSibling.previousElementSibling.innerText;
+            serviceInput.value = serviceName;
+            selectedServiceName.textContent = displayName;
+    
+            try {
+                // Check if the service is already booked
+                const response = await fetch(`/check-booking/${serviceName}/`);
+                const data = await response.json();
+    
+                if (data.error) {
+                    // Show error message if the service is already booked
+                    showErrorMessage(data.error);
+                } else {
+                    // Show the booking modal if no existing booking
+                    bookingModal.style.display = 'flex';
+                }
+            } catch (error) {
+                console.error("Error checking service booking:", error);
+                showErrorMessage("An error occurred while checking the service. Please try again.");
+            }
+        });
+    });
+    
+    
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/deep_dry.css' %}?101">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home_services' %}">Services</a></li>
+                    <li><a href="{% url 'home_about' %}">About Us</a></li>
+                    <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Deep Upholstery Shampooing</h1>
+            <ul>
+                <li>Most Recommended by over 800 customers</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services5.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">Best Way To Clean Your Couch
+            </h1>
+            <h2 class="section-subtitle">— Good bye smell & stains!
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services5.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3>
+                <br>Don’t let the dirt and stains reside in your sofas and mattresses for a long time.
+                <br>If you see it treat it! Don’t wait until it’s unfixable. It’s time to shampoo those long due stains and marks.
+                <br>Involves shampooing and application of effective and efficient cleaning 
+                <br>solution in targeted areas. This is best for stains, evident marks, and spillage.<br>
+                <br>The process involves detailing and thorough process of vacuuming using high suction guns to absorb the stains and odors within each cloth and linen. It will take 1-2 hours of curing, treating and cleaning with several passes from our Rainbow machine. After the procedure, we will leave your item 80-90% dry ensuring formula and shampoo settles in the body of your item.<br>
+             </h3>                
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+    
+</body>
+</html>

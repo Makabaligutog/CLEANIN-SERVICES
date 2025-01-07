@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'styles/user_blog.css' %}?101">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Services </h1>
+            </div>            
+            <ul class="centered-menu">
+                <li><a href="{% url 'u_home' %}">Home</a></li>
+                <li><a href="{% url 'user_services' %}">Services</a></li>
+                <li><a href="{% url 'user_about' %}">About Us</a></li>
+                <li><a href="{% url 'user_blog' %}">Blog</a></li>
+                <li>{{ request.user.username }}</li>
+                <img src="{% static 'images/icon2.png' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()">
+            </ul>
+        </nav>
+    </header>
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+        <a href="{% url 'user_profile' %}">Profile</a>
+        <a href="{% url 'home' %}">Sign Out</a>
+    </div>
+
+    <section class="content-container">
+        <div class="blog-section">
+            <h2>Blog Posts</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="{% static 'images/services1.jpg'%}" alt="Tips for a Cleaner Home" class="blog-image">
+                    <div class="blog-content">
+                        <p class="blog-date">February 11, 2024</p>
+                        <h3>Tips for a Cleaner Home</h3>
+                        <p>Discover essential cleaning tips that will help you maintain a tidy home and create a healthier environment.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="Blog/professional.jpg" alt="Importance of Professional Cleaning" class="blog-image">
+                    <div class="blog-content">
+                        <p class="blog-date">March 20, 2024</p>
+                        <h3>The Importance of Professional Cleaning</h3>
+                        <p>Learn why hiring a professional cleaning service can save you time and ensure your home is spotless.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="Blog/eco.jpg" alt="Eco-friendly Cleaning Solutions" class="blog-image">
+                    <div class="blog-content">
+                        <p class="blog-date">March 24, 2024</p>
+                        <h3>Eco-Friendly Cleaning Solutions</h3>
+                        <p>Explore eco-friendly cleaning products that are effective and safe for your family and pets.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="Blog/checklist.jpg" alt="Seasonal Cleaning Checklist" class="blog-image">
+                    <div class="blog-content">
+                        <p class="blog-date">October 1, 2024</p>
+                        <h3>Seasonal Cleaning Checklist</h3>
+                        <p>Get organized with our seasonal cleaning checklist to keep your home in top shape all year round.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="wide-blog-grid">
+        <h1>Newly Uploaded Blogs</h1>
+        {% for post in posts %}
+            <div class="blog-card">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image">
+                <div class="blog-content">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.created_at|date:"F d, Y" }}</p>
+                    <p>{{ post.content|truncatewords:30 }}</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+    
+        <script src="user_blog.js"></script>
+    <script src="{% static 'scripts/jquery.js' %}"></script>
+    <script src="{% static 'scripts/user_index.js'%}"></script>
+    <script>
+        // Sidebar toggle function
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        }
+
+        // Modal toggle function
+        function toggleModal() {
+            const modal = document.getElementById("bookingModal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        // Close modal when 'X' is clicked
+        document.getElementById("closeModal").onclick = function() {
+            toggleModal();
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById("bookingModal");
+            if (event.target === modal) {
+                toggleModal();
+            }
+        }
+        </script>
+</body>
+</html>
+

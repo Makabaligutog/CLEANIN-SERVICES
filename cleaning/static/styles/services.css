@@ -1,0 +1,422 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    /* background-image: linear-gradient(rgba(8, 216, 206, 0.771), rgba(43, 49, 53, 0.8)), url('image1/bgclean.jpg'); */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    /* background-attachment: fixed; */
+    overflow: auto;
+}
+
+header {
+    background-color: #FFB300; /* Header color */
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; /* Center items in the header */
+    height: 150px;
+}
+
+nav .logo {
+    width: 130px;
+    cursor: pointer;
+    left: 150px;
+    top: 10px;
+}
+/* Logo and Title Container */
+.logo-title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between logo and title text */
+    position: absolute;
+    left: 150px;
+    top: 10px;
+}
+
+.logo {
+    width: 50px; /* Adjust size as needed */
+}
+
+.site-title {
+    font-size: 30px; /* Adjust font size as needed */
+    font-weight: bolder;
+    color: black; /* Match the title color to your theme */
+}
+
+
+/* Navigation styles */
+nav {
+    font-size: 25px;
+    font-style: inherit;
+    color: black;
+    text-align: center;
+    padding-top: 70px;  
+    padding-left: 100px;  
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+/* nav ul.centered-menu li {
+    display: inline;
+    margin-right: 60px;
+} */
+
+.centered-menu li a:hover {
+    color: darkorange;
+}
+
+.content {
+    margin-left: 30px;
+}
+
+.men_text h1 {
+    font-size: 50px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: relative;
+    color: orange;
+    top: 100px;
+    left: 20px;
+}
+
+.men_text h1 span {
+    margin-left: 15px;
+    color: #fac031;
+    font-family: mv boli;
+    line-height: 22px;
+    font-size: 70px;
+}
+
+.men_text h2 {
+    color: #fff;
+    position: relative;
+    top: 80px;
+    left: 20px;
+}
+
+.text {
+    padding-top: 130px;
+    position: relative;
+    font-size: 18px;
+    font-family: 'Yu Gothic';
+    width: 850px;
+    left: 30px;  
+    color: white;
+    padding-bottom: 100px;
+}
+
+.main_image img {
+    width: 580px;
+    height: 480px;
+    position: absolute;
+    top: 170px;
+    right: 70px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;   
+    margin-left: 30px; /* Moves the conicontainer to the left */
+    padding: 0 20px;
+    
+}
+
+.section-subtitle {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-size: 60px;
+    font-weight: bold;
+    color: #D35400; /* Adjust the color to match your theme */
+    margin-bottom: 40px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap:15px; /* Spacing between cards */
+}
+/* Service Card */
+.service-card {
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFC107;
+    border-radius: 15px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Soft shadow for a subtle 3D effect */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.service-image {
+    width: 100%;
+    height: 400px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Ensures the image fills the area without distortion */
+    border-top-left-radius: 15px; /* Matches the rounded corners */
+    border-top-right-radius: 15px;
+}
+
+.service-content {
+    padding: 20px;
+    text-align: left;
+    color: #333;
+    width: 100%;
+    font-weight: bold;
+}
+
+.service-content h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.service-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.service-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #D35400; /* Matches button color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+
+.service-button:hover {
+    background-color: #B03A2E; /* Adjust hover color */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.centered-menu {
+    list-style: none;
+    display: flex;
+}
+
+.centered-menu li {
+    margin: 0 10px;
+}
+
+/* Profile Icon Style */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    top: 30px; /* Adjust this based on the header height */
+    right: 30px; /* Align it to the right */
+    margin-top: 40px;
+    
+}
+
+
+/* Sidebar Style */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #FFB300;
+    overflow-x: hidden;
+    transition: width 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+}
+
+/* Open Sidebar */
+.sidebar.open {
+    width: 250px;
+}
+
+/* Main Content Style */
+.main-content {
+    transition: margin-right 0.5s;
+    padding: 20px;
+}
+
+/* When Sidebar is Open */
+.main-content.sidebar-open {
+    margin-right: 250px; /* Adjusts to make space for the sidebar */
+}
+
+.men_text {
+    position: relative;
+    /*background-image: url('images/clean.jpeg');  Use your image as background */
+    background-size: cover; /* Ensure the image covers the entire div */
+    background-position: center; /* Center the background image */
+    height: 900px; /* Adjust the height as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
+    text-align: center;
+    padding: 100px;
+    color: white; /* Ensure text is readable on the background */
+}
+
+.men_text h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons styling */
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.social-media {
+    text-align: center; /* Center the content */
+    margin-top: 30px; /* Space above the section */
+}
+
+.social-media h3 {
+    font-size: 24px; /* Font size for the title */
+    margin-bottom: 15px; /* Space below the title */
+    color: white; /* Title color */
+}
+
+.social-icons {
+    display: flex; /* Align icons in a row */
+    justify-content: center; /* Center the icons */
+    gap: 20px; /* Space between icons */
+}
+
+.social-icon img {
+    width: 40px; /* Adjust icon size */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s ease; /* Add transition effect */
+}
+
+.social-icon img:hover {
+    transform: scale(1.1); /* Scale effect on hover */
+}
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Adjust the height as needed */
+    overflow: hidden;
+}
+
+.hero-section .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(70%); /* Darkens the image for better text contrast */
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-text p {
+    font-size: 24px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+   /* Centering the calendar */
+   #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+.calendar-header {
+    text-align: center;
+    margin: 20px 0;
+}
+/* Padding for the calendar section */
+#calendar-section {
+    padding: 40px 0; /* Adjust the top and bottom padding as needed */
+}
+
+/* Custom button styles for the calendar */
+.fc-button {
+    background-color: #D35400 !important; /* Change to your desired background color */
+    color: white !important; /* Change to your desired text color */
+    border: none !important; /* Remove default border */
+    padding: 10px 15px !important; /* Add some padding */
+    border-radius: 5px !important; /* Add rounded corners */
+    font-weight: bold; /* Make text bold */
+    padding-right: 15px;
+}
+
+.fc-button:hover {
+    background-color: #B03A2E !important; /* Change on hover */
+}
+
+.fc-button:focus {
+    outline: none !important; /* Remove focus outline */
+}
+.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child) {
+
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-right: 5px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/dashboard.css' %}?101"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>Sayago's Cleaning<span> Services</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%url 'ad_dashboard' %}" class="active"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"><i class="ri-file-chart-line"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png'%}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username}}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login'%}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h1>Dashboard</h1>
+            <div class="date">{{ current_date }}</div>
+        </header>
+        <section class="cards">
+          <div class="card">
+              <h2>Total Users</h2>
+              <div class="stat">{{ total_users }}</div>
+              <p>All registered users</p>
+          </div>
+          <div class="card">
+              <h2>Total Bookings</h2>
+              <div class="stat">{{ total_bookings }}</div>
+              <p>Total bookings in the system</p>
+          </div>
+          <div class="card">
+              <h2>Approved Bookings</h2>
+              <div class="stat">{{ approved_bookings }}</div>
+              <p>Bookings that have been approved</p>
+          </div>
+          <div class="card">
+              <h2>Pending Bookings</h2>
+              <div class="stat">{{ pending_bookings }}</div>
+              <p>Bookings awaiting approval</p>
+          </div>
+      </section>
+      
+        <section class="bookings">
+          <h2>Recent Bookings</h2>
+          {% for booking in bookings %}
+          <div class="booking">
+              <div class="booking-info">
+                  <h3>{{ booking.cleaning_service }}</h3>
+                  <p>{{ booking.first_name }} {{ booking.last_name }} - {{ booking.booking_date }}</p>
+              </div>
+              <div class="status {{ booking.status }}">{{ booking.status|title }}</div>
+          </div>
+          {% endfor %}
+      </section>      
+    </main>
+</body>
+</html>

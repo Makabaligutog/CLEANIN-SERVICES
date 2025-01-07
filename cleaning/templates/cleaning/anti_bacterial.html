@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/anti_bacterial.css' %}?120">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home_services' %}">Services</a></li>
+                    <li><a href="{% url 'home_about' %}">About Us</a></li>
+                    <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Anti-Bacterial Mist Treatment</h1>
+            <ul>
+                <li>Kills 99.9% Bacteria & Germs</li>
+                <li>Removes Odor & Odd Smell</li>
+                <li>Avoids flu & diseases</li>
+                <li>All-natural & Non-toxic</li>
+                <li>Safe for Humans & Pets</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services1.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">Protect Your Home From Deadly Bacteria
+            </h1>
+            <h2 class="section-subtitle">— Kills 99.9% of germs and bacteria within the area!
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services1.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3><br>Always best after deep cleaning service to complete<br> the whole process 360 degrees cleaning.
+                <br> Best for killing germs and bacteria within the area. 
+                <br>Bacteria which can cause you flu, asthma and allergies. It also takes away the foul<br> odor and smell.
+                <br> The fumigation / curing takes an average of 15 minutes per<br> car and about 20 minutes per standard size bedroom.<br>
+                <br>Our Anti-bacterial treatment is non-toxic and<br> environmentally-safe. <br>It has no harmful effect on humans and pets.<br> Non toxic and environmentally-safe for humans, pets,<br> babies, pregnant women and asthmatic people. <br>You may even stay in the area during the curing time.
+                <br></h3>                
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+
+</body>
+</html>

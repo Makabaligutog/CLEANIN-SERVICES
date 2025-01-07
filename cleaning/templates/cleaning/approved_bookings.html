@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Bookings - Sayago Cleaning Inc.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/approved.css' %}?100">
+    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- CSRF token for JavaScript -->
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+                    <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+                    <li><a href="{% url 'approved_bookings' %}" class="active">Approved Bookings</a></li>
+                    <li><a href="{% url 'most_booked_service' %}" class="active">Most Booked Services</a></li>
+                    <li><a href="{% url 'owner_login' %}">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <header>
+                <h1>Approved Bookings</h1>
+            </header>
+
+            <main>
+                <section class="admin-panel">
+                    <h2>Approved Bookings</h2>
+                    <a href="{% url 'ad_approved' %}" class="btn">Back to Bookings</a>
+                    <table class="user-table" role="table" aria-label="Approved Bookings Table">
+                        <thead role="rowgroup">
+                            <tr role="row">
+                                <th>Customer ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Contact Number</th>
+                                <th>Address</th>
+                                <th>Services</th>
+                                <th>Date Booked</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approved-appointments-table" role="rowgroup">
+                            {% if bookings %}
+                                {% for booking in bookings %}
+                                    {% if booking.status == 'approved' %}
+                                        <tr data-booking-id="{{ booking.booking_id }}">
+                                            <td>{{ booking.booking_id }}</td>
+                                            <td>{{ booking.user.username }}</td>
+                                            <td>{{ booking.user.email }}</td>
+                                            <td>{{ booking.first_name }}</td>
+                                            <td>{{ booking.last_name }}</td>
+                                            <td>{{ booking.contact_number }}</td>
+                                            <td>{{ booking.address }}</td>
+                                            <td>{{ booking.cleaning_service }}</td>
+                                            <td>{{ booking.booking_date }}</td>
+                                            <td class="status-cell">{{ booking.status }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="10">No approved bookings found.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sayago Cleaning Inc. Admin Dashboard</p>
+    </footer>
+
+    <script src="{% static 'scripts/admin_dash.js' %}"></script>
+</body>
+</html>

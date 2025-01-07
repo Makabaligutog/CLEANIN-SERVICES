@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-color: #333;
+            --light-text-color: #777;
+            --border-color: #e0e0e0;
+            --hover-color: #e8f0fe;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            flex-grow: 1;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-text-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .nav-links i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 0.75rem;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--light-text-color);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--light-text-color);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            margin-left: 250px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .date {
+            font-size: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .card .stat {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+        }
+
+        .bookings h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .booking {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .booking:hover {
+            transform: translateX(5px);
+        }
+
+        .booking-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .booking-info p {
+            color: var(--light-text-color);
+            font-size: 0.9rem;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status.completed {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        .status.pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                margin-bottom: 0.5rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .booking {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .booking-info {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>CleanCo</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="#"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="#"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="#"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="#"><i class="ri-customer-service-2-line"></i> Customers</a></li>
+                <li><a href="#"><i class="ri-file-chart-line"></i> Reports</a></li>
+                <li><a href="#"><i class="ri-settings-3-line"></i> Settings</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="https://placeholder.svg?height=40&width=40" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">John Doe</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <button class="logout-btn" title="Logout">
+                <i class="ri-logout-box-r-line"></i>
+            </button>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h1>Services</h1>
+            <div class="date">April 26, 2023</div>
+        </header>
+        <section class="cards">
+            <div class="card">
+                <h2>Total Users</h2>
+                <div class="stat">152</div>
+                <p>+12% from last month</p>
+            </div>
+            <div class="card">
+                <h2>Total Bookings</h2>
+                <div class="stat">$8,245</div>
+                <p>+5% from last month</p>
+            </div>
+            <div class="card">
+                <h2>Approved Bookings</h2>
+                <div class="stat">4.8/5</div>
+                <p>Based on 98 reviews</p>
+            </div>
+            <div class="card">
+                <h2>Pending Bookings</h2>
+                <div class="stat">23</div>
+                <p>5 due today</p>
+            </div>
+        </section>
+        <section class="bookings">
+            <h2>Recent Bookings</h2>
+            <div class="booking">
+                <div class="booking-info">
+                    <h3>Home Cleaning</h3>
+                    <p>John Doe - April 26, 2023</p>
+                </div>
+                <div class="status completed">Completed</div>
+            </div>
+            <div class="booking">
+                <div class="booking-info">
+                    <h3>Office Cleaning</h3>
+                    <p>Tech Co. - April 27, 2023</p>
+                </div>
+                <div class="status pending">Pending</div>
+            </div>
+            <div class="booking">
+                <div class="booking-info">
+                    <h3>Carpet Cleaning</h3>
+                    <p>Sarah Smith - April 28, 2023</p>
+                </div>
+                <div class="status pending">Pending</div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

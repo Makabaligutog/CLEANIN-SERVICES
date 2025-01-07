@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayago's Cleaning Services</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_index.css' %}?102">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Services</h1>
+            </div>            
+            <ul class="centered-menu">
+                <li><a href="{% url 'u_home' %}">Home</a></li>
+                <li><a href="{% url 'user_services' %}">Services</a></li>
+                <li><a href="{% url 'user_about' %}">About Us</a></li>
+                <li><a href="{% url 'user_blog' %}">Blog</a></li>
+                <li>Welcome! {{ request.user.username }}</li>
+                <img src="{% static 'images/icon2.png' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()">
+            </ul>
+        </nav>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+        <a href="{% url 'user_profile' %}">Profile</a>
+        <a href="{% url 'home' %}">Sign Out</a>
+    </div>
+
+    <div class="content" style="background-image: url('{% static "images/noga.jpeg" %}');">
+        <div class="content-overlay">
+            <div class="men_text">
+                <h2>The Best Cleaners Are Ready For Your Home</h2>
+                <div class="text">
+                    <p>Sayago's Cleaning Services offers top-rated cleaning solutions for your home and office.</p>
+                </div>
+                <div class="buttons">
+                    <a href="#" class="book-now" id="bookNowBtn">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- New Section: Testimonial -->
+    <section id="testimonials" class="section">
+        <div class="section-title">
+            <h2>What Our Clients Say</h2>
+            <p>Our customers are our biggest advocates. Here’s what they have to say!</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial-item">
+                <p>"Sayago's Cleaning Services made my home shine! Their team was professional, friendly, and efficient. Highly recommend!"</p>
+                <h4>Emily W.</h4>
+                <p>Homeowner</p>
+            </div>
+            <div class="testimonial-item">
+                <p>"As a business owner, I trust Sayago's with all of my cleaning needs. They are always on time and do an exceptional job."</p>
+                <h4>John D.</h4>
+                <p>Business Owner</p>
+            </div>
+            <div class="testimonial-item">
+                <p>"I hired them for a move-out cleaning, and they exceeded my expectations. Everything was spotless, and the process was easy."</p>
+                <h4>Sarah M.</h4>
+                <p>Tenant</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact-section">
+        <div class="contact-column">
+            <h3>Programs</h3>
+            <p><a href="#">Corporate</a></p>
+            <p><a href="#">One to One</a></p>
+            <p><a href="#">Consulting</a></p>
+        </div>
+        <div class="contact-column">
+            <h3>Services</h3>
+            <p><a href="#">Training</a></p>
+            <p><a href="#">Coaching</a></p>
+            <p><a href="#">Consulting</a></p>
+        </div>
+        <div class="contact-column">
+            <h3>Contact</h3>
+            <p><a href="#">Home</a></p>
+            <p><a href="#">About</a></p>
+            <p><a href="#">Contact</a></p>
+        </div>
+        <div class="newsletter">
+            <div class="social-icons">
+                <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            
+            <p>Mobile: +917892474250</p>
+            <p>Email: SayagoCleaningServices@gmail.com</p>
+        </div>
+    </div>
+    
+
+    <!-- Modal for the Booking Form -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal" aria-label="Close booking form">&times;</span>
+            <h2>Book Your Cleaning Service</h2>
+    
+            <form id="bookingForm">
+                {% csrf_token %}
+                <!-- Form Title Section -->
+                <div class="form-header">
+                    <h3 class="form-title">Let's Get Started</h3>
+                    <p>Fill out the form below to book your cleaning service. We'll get in touch soon!</p>
+                </div>
+    
+                <!-- Input Fields -->
+                <div class="form-body">
+                    <div class="form-group">
+                        <label for="cleaningType" class="form-label"><i class="fas fa-broom"></i> Choose a Cleaning Service:</label>
+                        <select id="cleaningType" name="cleaning_service" class="form-control" required>
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="residential">Residential Cleaning</option>
+                            <option value="commercial">Commercial Cleaning</option>
+                            <option value="move-in-out">Move-in/Move-out Cleaning</option>
+                            <option value="carpet-cleaning">Carpet Cleaning</option>
+                            <option value="window-cleaning">Window Cleaning</option>
+                            <option value="anti-bacterial-mist">Anti-Bacterial Mist Treatment</option>
+                            <option value="car-interior-detailing">Car Interior Detailing</option>
+                            <option value="deep-dry-cleaning">Deep Dry Cleaning</option>
+                            <option value="deep-home-cleaning">Deep Home Cleaning</option>
+                            <option value="deep-upholstery-shampooing">Deep Upholstery Shampooing</option>
+                            <option value="steam-sterilization">Superior Steam Sterilization</option>
+                            <option value="eco-friendly">Eco-friendly Green Cleaning</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label"><i class="fas fa-user" required></i> First Name:</label>
+                            <input type="text" id="firstName" name="first_name" class="form-control" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label"><i class="fas fa-user" required></i> Last Name:</label>
+                            <input type="text" id="lastName" name="last_name" class="form-control" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber" class="form-label"><i class="fas fa-phone-alt"></i> Contact Number:</label>
+                        <input type="tel" id="contactNumber" name="contact_number" class="form-control" 
+                               placeholder="Enter your contact number" 
+                               required pattern="^\+?[0-9]{10,15}$" 
+                               title="Please enter a valid contact number (11 digits)">
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="form-label"><i class="fas fa-map-marker-alt" required></i> Address:</label>
+                        <textarea id="address" name="address" class="form-control" placeholder="Enter your address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDate" class="form-label"><i class="fas fa-calendar-alt"></i> Select Booking Date:</label>
+                        <input type="date" id="bookingDate" name="booking_date" class="form-control" 
+                               required min="{{ date.today|date:'Y-m-d' }}" 
+                               title="The booking date must not be in the past.">
+                    </div>
+                    <div class="form-group">
+                        <label for="additionalInfo" class="form-label"><i class="fas fa-pencil-alt"></i> Additional Info:</label>
+                        <textarea id="additionalInfo" name="additional_info" class="form-control" placeholder="Additional details"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                        <label for="privacyPolicy">
+                            <i class="fas fa-shield-alt"></i> I have read and accept the 
+                            <a href="#" id="privacyPolicyLink">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                </div>
+    
+                <!-- Submit Button -->
+                <div class="form-footer">
+                    <button id="booking_submit_btn" class="form-button" type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- JavaScript Links -->
+    <script src="{% static 'scripts/jquery.js' %}"></script>
+    <script src="{% static 'scripts/user_index.js'%}"></script>
+    <script>
+        // Sidebar toggle function
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        }
+
+        // Modal toggle function
+        function toggleModal() {
+            const modal = document.getElementById("bookingModal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        document.getElementById("bookNowBtn").onclick = function() {
+            toggleModal();
+        }
+
+        document.getElementById("closeModal").onclick = function() {
+            toggleModal();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("bookingModal");
+            if (event.target === modal) {
+                toggleModal();
+            }
+        }
+
+        document.getElementById("bookingForm").onsubmit = function(event) {
+            event.preventDefault();
+            alert("Booking submitted!");
+        }
+        function showPrivacyPolicy() {
+            const policySection = document.getElementById("privacyPolicySection");
+            if (policySection.style.display === "none" || policySection.style.display === "") {
+                policySection.style.display = "block"; // Show the privacy policy
+            } else {
+                policySection.style.display = "none"; // Hide the privacy policy
+            }
+        }
+        
+    </script>
+</body>
+</html>

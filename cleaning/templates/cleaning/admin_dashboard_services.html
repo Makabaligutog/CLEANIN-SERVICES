@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/admin_dashboard_services.css' %}?100"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>Sayago Cleaning Services</span>
+        </div>
+        <nav class="nav-links">
+            <li><a href="{%url 'ad_dashboard' %}" ><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"class="active"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"><i class="ri-file-chart-line"></i> Reports</a></li>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png'%}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username}}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login'%}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h1>Welcome to Sayago's Cleaning Services Dashboard</h1>
+            <div class="date">{{ current_date }}</div>
+        </header>
+        <section id="services" class="services-section">
+            <h2 class="section-subtitle">Our Services</h2>
+            <div class="services-grid">
+                <!-- Residential Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services7.jpg' %}" alt="Residential Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Residential Cleaning</h3>
+                        <p>Expert cleaning for your home, covering every room to ensure a spotless, fresh living space.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Commercial Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services8.jpg' %}" alt="Commercial Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Commercial Cleaning</h3>
+                        <p>Professional cleaning services for offices, retail spaces, and other commercial properties to keep your work environment pristine.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Move-in/Move-out Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services9.jpg' %}" alt="Move-in/Move-out Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Move-in/Move-out Cleaning</h3>
+                        <p>Specialized cleaning services to make your transition in or out of a home seamless and stress-free.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Carpet Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services0.jpg' %}" alt="Carpet Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Carpet Cleaning</h3>
+                        <p>Our carpet cleaning services refresh your carpets, removing dirt, stains, and allergens for a healthier home.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Window Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services11.jpg' %}" alt="Window Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Window Cleaning</h3>
+                        <p>Efficient window cleaning services that leave your windows crystal clear and streak-free.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-line"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Upholstery Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services5.jpg' %}" alt="Upholstery Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Upholstery Cleaning</h3>
+                        <p>Deep-cleaning solutions for sofas, chairs, and other furniture, restoring their original look and feel.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Deep Cleaning -->
+                <div class="service-card">
+                    <img src="{% static 'images/services3.jpg' %}" alt="Deep Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Deep Cleaning</h3>
+                        <p>Comprehensive cleaning to reach every nook and cranny, perfect for spring cleaning or preparing for events.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-line"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="service-card">
+                    <img src="{% static 'images/services4.jpg' %}" alt="Post-Construction Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Deep Home Cleaning</h3>
+                        <p>In a nutshell, almost every nook and cranny of your home will get special attention with an extensive routine of deep cleaning, from sweeping, brooming, and vacuuming of floors, wiping of areas.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'images/services6.jpg' %}" alt="Post-Construction Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Superior Steam Sterilization</h3>
+                        <p>Pamper your home and fabrics with the most traditional way of removing stubborn dirt within cloth and even germs. It is very effective when bed bugs are on the surfaces of items and can be effective up to 3/4" into fabrics surfaces.</p>
+                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'images/services7.jpg' %}" alt="Post-Construction Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Eco-friendly Green Cleaning</h3>
+                        <p>Eco-friendly cleaning involves using practices and products that minimize negative impacts on the environment and human health. This includes avoiding harsh chemicals, reducing water and energy consumption, and choosing sustainable materials.</p>                        <div class="rating">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-half-fill"></i>
+                            <i class="ri-star-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        </main>
+    </body>
+    </html>
+    

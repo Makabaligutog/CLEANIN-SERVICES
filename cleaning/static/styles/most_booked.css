@@ -1,0 +1,145 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* Admin Container Layout */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #1F2937;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar h2 {
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #FFC857;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+    color: #E5E7EB;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background-color: #FFC857;
+    color: #1F2937;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    margin-left: 250px; /* Sidebar width */
+    padding: 30px;
+}
+
+.main-content header {
+    background-color: #FFC857;
+    color: #1F2937;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Panel Sections */
+.admin-panel {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.admin-panel h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 1.8em;
+    text-align: center;
+    border-bottom: 2px solid #FFC857;
+    padding-bottom: 10px;
+}
+
+/* Month Container Styling */
+.month-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.month-box {
+    background-color: #FFC857;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.month-box h3 {
+    font-size: 1.4em;
+    color: #1F2937;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.month-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.month-box ul li {
+    font-size: 1.1em;
+    margin: 10px 0;
+    color: #1F2937;
+}
+
+.month-box ul li strong {
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #1F2937;
+    color: #E5E7EB;
+    font-size: 0.9em;
+    position: fixed;
+    width: calc(100% - 250px);
+    bottom: 0;
+    left: 250px;
+}

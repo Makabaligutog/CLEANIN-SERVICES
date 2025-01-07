@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/booking_table.css' %}?103"/>
+    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- CSRF token for JavaScript -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>Sayago's Cleaning<span> Services</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%url 'ad_dashboard' %}"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}"class="active"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"><i class="ri-file-chart-line"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png'%}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username}}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login'%}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="header">
+            <h1>Dashboard</h1>
+            <div class="date">{{ current_date }}</div>
+        </header>
+        <section class="cards">
+          <div class="card">
+              <h2>Total Users</h2>
+              <div class="stat">{{ total_users }}</div>
+              <p>All registered users</p>
+          </div>
+          <div class="card">
+              <h2>Total Bookings</h2>
+              <div class="stat">{{ total_bookings }}</div>
+              <p>Total bookings in the system</p>
+          </div>
+          <div class="card">
+              <h2>Approved Bookings</h2>
+              <div class="stat">{{ approved_bookings }}</div>
+              <p>Bookings that have been approved</p>
+          </div>
+          <div class="card">
+              <h2>Pending Bookings</h2>
+              <div class="stat">{{ pending_bookings }}</div>
+              <p>Bookings awaiting approval</p>
+          </div>
+      </section>
+      
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <header>
+                <h1>Bookings</h1>
+            </header>
+
+            <main>
+
+                <section class="admin-panel">
+                    <h2>Bookings</h2>
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search by customer name..." onkeyup="searchCustomer()">
+                    </div>
+
+                    <table class="user-table" role="table" aria-label="Bookings Table">
+                        <thead role="rowgroup">
+                            <tr role="row">
+                                <th role="columnheader">Customer ID</th>
+                                <th role="columnheader">Username</th>
+                                <th role="columnheader">Email</th>
+                                <th role="columnheader">First Name</th>
+                                <th role="columnheader">Last Name</th>
+                                <th role="columnheader">Contact Number</th>
+                                <th role="columnheader">Address</th>
+                                <th role="columnheader">Services</th>
+                                <th role="columnheader">Date Booked</th>
+                                <th role="columnheader">Status</th>
+                                <th role="columnheader">Action</th> 
+                            </tr>
+                        </thead>
+                        <tbody id="approved-appointments-table" role="rowgroup">
+                            {% if bookings %}
+                                {% for booking in bookings %}
+                                    <tr data-booking-id="{{ booking.booking_id }}">
+                                        <td>{{ booking.booking_id }}</td>
+                                        <td>{{ booking.user.username }}</td>
+                                        <td>{{ booking.user.email }}</td>
+                                        <td>{{ booking.first_name }}</td>
+                                        <td>{{ booking.last_name }}</td>
+                                        <td>{{ booking.contact_number }}</td>
+                                        <td>{{ booking.address }}</td>
+                                        <td>{{ booking.cleaning_service }}</td>
+                                        <td>{{ booking.booking_date }}</td>
+                                        <td class="status-cell">{{ booking.status }}</td>
+                                        <td>
+                                            <button 
+                                                class="action-btn accept-btn" 
+                                                onclick="handleAction({{ booking.booking_id }}, '{{ booking.first_name}} {{ booking.last_name }}','{{ booking.user.email }}', 'approve')" 
+                                                {% if booking.status != 'pending' %}disabled{% endif %}>
+                                                Approve
+                                            </button>
+                                            <button 
+                                                class="action-btn delete-btn" 
+                                                onclick="handleAction({{ booking.booking_id }},  '{{ booking.first_name}} {{ booking.last_name }}',{{ booking.user.email }}, 'deny')" 
+                                                {% if booking.status != 'pending' %}disabled{% endif %}>
+                                                Deny
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="11">No bookings found.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>      
+    </main>
+    <script src="{% static 'scripts/admin_dash.js' %}"></script>
+    <script>
+        emailjs.init({
+            publicKey: 'LClqy9KpjAqwKZtgQ',
+            // Do not allow headless browsers
+            blockHeadless: true,
+            limitRate: {
+              // Set the limit rate for the application
+              id: 'app',
+              // Allow 1 request per 10s
+              throttle: 10000,
+            },
+          });
+
+        // Totals
+        const totalBookings = {{ total_bookings|default:0 }};
+        const approvedBookings = {{ approved_bookings|default:0 }};
+        const pendingBookings = {{ pending_bookings|default:0 }};
+
+        document.getElementById('total-bookings').textContent = totalBookings;
+        document.getElementById('approved-bookings').textContent = approvedBookings;
+        document.getElementById('pending-bookings').textContent = pendingBookings;
+
+        // Search Functionality
+        function searchCustomer() {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            const rows = document.querySelectorAll('#approved-appointments-table tr');
+
+            rows.forEach(row => {
+                const customerName = row.cells[1]?.textContent.toLowerCase() || '';
+                if (customerName.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // CSRF Token Helper
+        function getCsrfToken() {
+            const metaToken = document.querySelector('meta[name="csrf-token"]');
+            if (!metaToken) {
+                console.error('CSRF token not found!');
+                return '';
+            }
+            return metaToken.content;
+        }
+
+        // Approve/Deny Booking
+        function handleAction(bookingId, name, email, action) {
+            const confirmMessage = action === 'approve' 
+                ? 'Are you sure you want to approve this booking?' 
+                : 'Are you sure you want to deny this booking?';
+            if (!confirm(confirmMessage)) return;
+
+            const url = action === 'approve' 
+                ? `/approve-booking/${bookingId}/` 
+                : `/deny-booking/${bookingId}/`;
+
+            var templateParams = {
+                to_name: name,
+                to_email: email,
+                message: action,
+            };
+    
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCsrfToken(),
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (action === 'approve') {
+                    endpoint = `/confirm_booking/${bookingId}/`; 
+    
+
+                    emailjs.send('service_r7qlwvc', 'template_wx81izr', templateParams).then(
+                      (response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                      },
+                      (error) => {
+                        console.log('FAILED...', error);
+                      },
+                    );
+                } else if (action === 'deny') {
+                    endpoint = `/deny_booking/${bookingId}/`;
+                    emailjs.send('service_r7qlwvc', 'template_wx81izr', templateParams).then(
+                      (response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                      },
+                      (error) => {
+                        console.log('FAILED...', error);
+                      },
+                    );
+                }
+    
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing the request.');
+            });
+        }
+    </script>
+</body>
+</html>

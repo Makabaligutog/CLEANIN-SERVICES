@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearView Cleaning Co.</title>
+
+    <!-- Load static files -->
+    {% load static %}
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}?107">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="Sayago's Cleaning Logo">
+                <h1 class="site-title">ClearView Cleaning Services</h1>
+            </div>            
+            <ul class="centered-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home_services' %}">Services</a></li>
+                <li><a href="{% url 'home_about' %}">About Us</a></li>
+                <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="content" style="background-image: url('{% static 'images/noga.jpeg' %}');">
+        <div class="content-overlay">
+            <h2>ClearView Cleaning Services</h2>
+            <p>
+                Sayago's Cleaning Services offers a range of professional cleaning services,  
+                including residential cleaning for homes, such as deep cleaning and move-in/move-out services. 
+                We also provide commercial cleaning for offices, retail spaces, and industrial facilities. 
+                Specialty services include carpet and upholstery cleaning, window washing, 
+                and eco-friendly green cleaning options.
+            </p>
+            <a href="{% url 'login' %}" class="login-btn" id="login-btn">Book Now</a>
+        </div>
+    </main>
+
+    <!-- More Cleaning Services Section -->
+    <section class="services-section">
+        <h2>Our Cleaning Services</h2>
+        <div class="service-container">
+            <div class="service-item">
+                <img src="{% static 'images/residential_cleaning.jpg' %}" alt="Residential Cleaning" class="service-image">
+                <h3>Residential Cleaning</h3>
+                <p>
+                    Whether you're looking for a thorough deep clean or a regular maintenance cleaning, 
+                    our residential cleaning services can be tailored to meet your specific needs. We offer 
+                    move-in and move-out cleaning, ensuring your home is spotless when you move in or out. 
+                    Our team uses high-quality cleaning products to sanitize and freshen every corner of your home.
+                </p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/commercial_cleaning.jpg' %}" alt="Commercial Cleaning" class="service-image">
+                <h3>Commercial Cleaning</h3>
+                <p>
+                    We understand the importance of maintaining a clean and professional environment. 
+                    Our commercial cleaning services cover offices, retail spaces, and industrial facilities. 
+                    From general office cleaning to specialized industrial cleaning, we handle it all to help your business 
+                    maintain a clean and welcoming atmosphere.
+                </p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/carpet_cleaning.jpg' %}" alt="Carpet and Upholstery Cleaning" class="service-image">
+                <h3>Carpet & Upholstery Cleaning</h3>
+                <p>
+                    Our advanced carpet and upholstery cleaning services help remove deep stains, dirt, and allergens. 
+                    We use eco-friendly cleaning solutions that are safe for pets and children, ensuring your home or 
+                    office space looks and feels fresh again.
+                </p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/window_washing.jpg' %}" alt="Window Washing" class="service-image">
+                <h3>Window Washing</h3>
+                <p>
+                    Say goodbye to streaky windows! We provide expert window cleaning services for both residential and 
+                    commercial properties. Our team uses specialized equipment to ensure crystal-clear, streak-free results.
+                </p>
+            </div>
+            <div class="service-item">
+                <img src="{% static 'images/eco_cleaning.jpg' %}" alt="Eco-Friendly Green Cleaning" class="service-image">
+                <h3>Eco-Friendly Green Cleaning</h3>
+                <p>
+                    For those who are environmentally conscious, our green cleaning services use sustainable, non-toxic products 
+                    that are safe for the planet and your family. We offer green cleaning options for all our services, ensuring 
+                    you can keep your home or office spotless without compromising on the environment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- "What Our Clients Say" Section -->
+    <section class="feedback-section">
+        <h2>What Our Clients Say</h2>
+        <div class="feedback-container">
+            <button id="prev-btn" class="nav-btn" onclick="navigateFeedback('prev')">&lt;</button>
+            
+            <div id="feedback-content" class="feedback-message">
+                <!-- The current feedback message will be displayed here -->
+            </div>
+
+            <button id="next-btn" class="nav-btn" onclick="navigateFeedback('next')">></button>
+        </div>
+    </section>
+
+    <!-- Include your JS file -->
+    <script src="{% static 'scripts/index.js' %}?100"></script>
+    <script>
+        let currentFeedbackIndex = 0;
+        const feedbacks = [
+            {% for feedback in feedbacks %}
+                {
+                    name: "{{ feedback.name }}",
+                    message: "{{ feedback.message }}",
+                    email: "{{ feedback.email }}"
+                },
+            {% empty %}
+                {}
+            {% endfor %}
+        ];
+
+        // Function to update the displayed feedback message
+        function updateFeedback() {
+            const feedback = feedbacks[currentFeedbackIndex];
+            const feedbackContent = document.getElementById("feedback-content");
+
+            if (feedback.name) {
+                feedbackContent.innerHTML = `
+                    <p><strong>${feedback.name}:</strong></p>
+                    <p>${feedback.message}</p>
+                    <p><em>(${feedback.email})</em></p>
+                `;
+            } else {
+                feedbackContent.innerHTML = "<p>No feedback available.</p>";
+            }
+
+            // Disable the previous button if we are on the first feedback
+            document.getElementById("prev-btn").disabled = currentFeedbackIndex === 0;
+
+            // Disable the next button if we are on the last feedback
+            document.getElementById("next-btn").disabled = currentFeedbackIndex === feedbacks.length - 1;
+        }
+
+        // Function to handle the next/previous navigation
+        function navigateFeedback(direction) {
+            if (direction === "next" && currentFeedbackIndex < feedbacks.length - 1) {
+                currentFeedbackIndex++;
+            } else if (direction === "prev" && currentFeedbackIndex > 0) {
+                currentFeedbackIndex--;
+            }
+
+            updateFeedback();
+        }
+
+        // Initialize the first feedback on page load
+        updateFeedback();
+    </script>
+</body>
+</html>

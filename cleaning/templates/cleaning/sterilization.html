@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/deep_dry.css' %}?101">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home_services' %}">Services</a></li>
+                    <li><a href="{% url 'home_about' %}">About Us</a></li>
+                    <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Superior Steam Sterilization</h1>
+            <ul>
+                <li>Most Recommended by over 800 customers</li>
+                <li>Complete Package, Affordable Rates</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services6.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">Pamper Your Fabric with Steam Sterilization Process
+            </h1>
+            <h2 class="section-subtitle">— Most Traditional Way of Removing Stubborn Dirt Within Cloth & Fabric
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services6.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3>
+                <br>Pamper your home and fabrics with the most traditional way of removing stubborn dirt within cloth and even germs. 
+                <br>It is very effective when bed bugs are on the surfaces of items
+                <br>and can be effective up to 3/4″ into fabrics surfaces. In cracks and crevices, 
+                <br>steam will kill bed bugs up to 2-3/8″ into a gap.<br>
+                <br>With the use of acceptable heat temperature the area is being treated with steam sterilization process.<br>
+             </h3>          
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+    
+</body>
+</html>

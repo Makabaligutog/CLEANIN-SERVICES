@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_about.css' %}?100">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Clear View Cleaning Services</h1>
+            </div>
+            <ul class="centered-menu">
+                <li><a href="{% url 'u_home' %}">Home</a></li>
+                <li><a href="{% url 'user_services' %}">Services</a></li>
+                <li><a href="{% url 'user_about' %}">About Us</a></li>
+                <li><a href="{% url 'user_blog' %}">Blog</a></li>
+                <li>{{ request.user.username }}</li>
+                <img src="{% static 'images/icon2.png' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()">
+            </ul>
+        </nav>
+    </header>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+        <a href="{% url 'user_profile' %}">Profile</a>
+        <a href="{% url 'home' %}">Sign Out</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Professional Cleaning Services</h1>
+            <p>Experience the best in cleaning for your home or business.</p>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+        <h2>Why Choose ClearView?</h2>
+        <div class="benefits">
+            <div class="benefit-item">
+                <h3>Reliable Services</h3>
+                <p>We provide dependable, high-quality cleaning services, ensuring customer satisfaction.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Trained Professionals</h3>
+                <p>Our team consists of highly trained cleaners who meet the highest standards.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Eco-Friendly Solutions</h3>
+                <p>We use environmentally friendly cleaning products that are safe for you and your family.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="feedback">
+        <h2>What Our Clients Say</h2>
+        <div class="feedback-item">
+            <p>"ClearView transformed my home! Highly recommend their service!"</p>
+            <span>- Mharion S.</span>
+        </div>
+        <div class="feedback-item">
+            <p>"Professional and reliable. Great service every time!"</p>
+            <span>- Jay P.</span>
+        </div>
+    </section>
+
+    <section class="user-feedback">
+        <h2>Leave Your Feedback</h2>
+        <form id="feedback-form" action="{% url 'submit_feedback' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Feedback:</label>
+                <textarea id="message" name="message" rows="5" placeholder="Your Feedback" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <script src="user_about.js"></script>
+    <script src="{% static 'scripts/jquery.js' %}"></script>
+    <script src="{% static 'scripts/user_index.js'%}"></script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        }
+    </script>
+</body>
+</html>

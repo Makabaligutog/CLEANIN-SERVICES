@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            background-color: #f0f4f8;
+            background-image: url("{% static 'images/login.jpg' %}");
+        }
+
+        .left-section {
+            width: 50%;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .left-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .left-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-container {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container form {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h2 {
+            color: #4A5568;
+            font-size: 1.6em;
+            margin-bottom: 1.2em;
+            text-align: center;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #A0AEC0;
+            font-size: 1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px 10px 40px;
+            border: 1px solid #CBD5E0;
+            border-radius: 8px;
+            background: #E2E8F0;
+            font-size: 0.95em;
+            color: #2D3748;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: #A0AEC0;
+        }
+
+        input:focus {
+            background: #fff;
+            border: 1px solid #3182CE;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px 0;
+            background-color: #48BB78;
+            color: white;
+            font-size: 0.95em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #38A169;
+        }
+
+        .signup-text {
+            text-align: center;
+            margin-top: 10px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .signup-text a {
+            color: #3182CE;
+            text-decoration: none;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .left-section, .form-container {
+                width: 100%;
+                height: auto;
+            }
+
+            .left-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Section with Persuasive Text -->
+    <div class="left-section">
+        <h1>Welcome to Our Community!</h1>
+        <p>
+            Create your account and unlock access to the best services tailored for your needs. 
+            Join a growing network of users who trust us to simplify their lives.
+        </p>
+    </div>
+
+    <!-- Right Section with Registration Form -->
+    <div class="form-container">
+        <form method="POST" id="registerForm">
+            {% csrf_token %}
+            <h2>Create Your Account</h2>
+
+            {% if messages %}
+            <div class="error-messages">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" id="id_username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" id="id_email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password1" id="id_password1" placeholder="Enter your password" required>
+            </div>
+
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password2" id="id_password2" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Register</button>
+            <p class="signup-text">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+</body>
+</html>

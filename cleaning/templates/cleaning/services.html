@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayago's Cleaning Services</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_services.css' %}?110 ">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Services </h1>
+            </div>   
+            <ul class="centered-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home_services' %}">Services</a></li>
+                <li><a href="{% url 'home_about' %}">About Us</a></li>
+                <li><a href="{% url 'home_blog' %}">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <img src="{% static 'images/noga.jpeg' %}" alt="Cleaning Service" class="hero-image">
+        <div class="hero-text">
+            <h1>Welcome to Sayago's Cleaning Services</h1>
+            <p>Experience Sayago's Cleaning Co.'s most rated deep cleaning process</p>
+        </div>
+    </div>    
+
+            <!-- Services Section -->
+        <section id="services" class="services-section"></section>
+            <h2 class="section-subtitle">Our Services</h2>
+            <h1 class="section-title">We've got what you need!</h1>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services1.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">
+                    <div class="service-content">
+                        <h3>Anti-Bacterial Mist Treatment</h3>
+                        <p>Always best after deep cleaning service to complete the whole process with 360-degree cleaning. Best for killing germs and bacteria within the area. Bacteria that can cause you flu, asthma, and allergies.</p>
+                        <a href="{% url 'anti_bacterial' %}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="{% static 'images/services2.jpg' %}" alt="Car Interior Detailing" class="service-image">
+                    <div class="service-content">
+                        <h3>Car Interior Detailing</h3>
+                        <p>Detailing a car interior involves a deep cleaning of the car's cabin. Various materials, high-technology machines, and patented solutions have been used on vehicle interiors to give it its revamped look and new aroma.</p>
+                        <a href="{% url 'car_interior' %}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Additional Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services3.jpg' %}" alt="Deep Dry Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Deep Dry Cleaning</h3>
+                        <p>Keep your mattress/sofas clean, dry vacuumed, and scented all the time. Savor the comfort each time. Best for linen/leather sofa, mattress, and removal of dirt, mites, and residue on targeted areas.</p>
+                        <a href="{% url 'deep_dry'%}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'images/services4.jpg' %}" alt="Deep Home Cleaning" class="service-image">
+                    <div class="service-content">
+                        <h3>Deep Home Cleaning</h3>
+                        <p>In a nutshell, almost every nook and cranny of your home will get special attention with an extensive routine of deep cleaning, from sweeping, brooming, and vacuuming of floors, wiping of areas.</p>
+                        <a href="{% url 'deep_home'%}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'images/services5.jpg' %}" alt="Deep Upholstery Shampooing" class="service-image">
+                    <div class="service-content">
+                        <h3>Deep Upholstery Shampooing</h3>
+                        <p>Don’t let the dirt cling to your sofas/mattresses. It’s time to shampoo those long-due stains and marks. Involves shampooing and application of effective and efficient cleaning solutions in targeted areas.</p>
+                        <a href="{% url 'deep_holstery'%}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'images/services6.jpg' %}" alt="Superior Steam Sterilization" class="service-image">
+                    <div class="service-content">
+                        <h3>Superior Steam Sterilization</h3>
+                        <p>Pamper your home and fabrics with the most traditional way of removing stubborn dirt within cloth and even germs. It is very effective when bed bugs are on the surfaces of items and can be effective up to 3/4" into fabrics surfaces.</p>
+                        <a href="{% url 'sterilize'%}" class="service-button">Learn More</a>
+                    </div>
+                </div>
+                
+            </div> 
+        </section>
+</body>
+</html>

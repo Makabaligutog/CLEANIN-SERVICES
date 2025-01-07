@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/deep_home.css' %}?101">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home_services' %}">Services</a></li>
+                    <li><a href="{% url 'home_about' %}">About Us</a></li>
+                    <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Deep Home Cleaning</h1>
+            <ul>
+                <li>Most Recommended by over 800 customers</li>
+                <li>Complete Package, Affordable Rates</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services4.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">A Completely Clean Home.
+            </h1>
+            <h2 class="section-subtitle">— Just the way you want to live in it.
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services4.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3>
+                <br>If you’re looking to have your whole house cleaned or before a special event,
+                <br>this is the right service for you. In a nutshell, almost every nook and cranny of your home
+                 <br>will get special attention with extensive routine of deep cleaning from sweeping, brooming and vacuuming of floors, 
+                  <br>wiping of areas, mattress and sheet vacuuming, bathroom sanitation, aromatizing (a scent of your choice),
+                  <br>and air purification to keep the dust mites away.<br>
+                   <br>This is best for cleaning of standalone houses, apartments, condos, commercial spaces, and different spaces.<br>
+             </h3>               
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+    
+</body>
+</html>

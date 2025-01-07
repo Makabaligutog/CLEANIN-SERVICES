@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_blog.css'%}">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+            <ul class="centered-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'home_services' %}">Services</a></li>
+                <li><a href="{% url 'home_about' %}">About Us</a></li>
+                <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+    
+        <section class="content-container">
+    <div class="blog-section">
+        <div class="blog">
+            <h2>Blog Posts</h2>
+            <br>
+
+            <div class="blog-post">
+                <img src="Blog/tips.jpg" alt="Tips" class="tips-image">
+                <div class="blog-post-content">
+                    <p>February 11, 2024</p>
+                    <br>
+                    <h3>Tips for a Cleaner Home</h3>
+                    <p>Discover essential cleaning tips that will help you maintain a tidy home and create a healthier environment.</p>
+                    <a href="#" class="read-more">Read More</a>
+                    <div class="rating">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span> 
+                        
+                    </div>
+                   
+                </div>
+            </div>
+
+            <div class="blog-post">
+                <img src="Blog/professional.jpg" alt="Importance of Professional Cleaning" class="pro-image">
+                <div class="blog-post-content">
+                    <p>March 20, 2024</p>
+                    <br>
+                    <h3>The Importance of Professional Cleaning</h3>
+                    <p>Learn why hiring a professional cleaning service can save you time and ensure your home is spotless.</p>
+                    <a href="#" class="read-more">Read More</a>
+                    <div class="rating">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                       
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="blog-post">
+                <img src="Blog/eco.jpg" alt="Eco-friendly cleaning materials" class="eco-image">
+                <div class="blog-post-content">
+                    <p>March 24, 2024</p>
+                    <br>
+                    <h3>Eco-Friendly Cleaning Solutions</h3>
+                    <p>Explore eco-friendly cleaning products that are effective and safe for your family and pets.</p>
+                    <a href="#" class="read-more">Read More</a>
+                    <div class="rating">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span> 
+                        
+                    </div>
+                   
+                </div>
+            </div>
+
+            <div class="blog-post">
+                <img src="Blog/checklist.jpg" alt="Checklist" class="checklist-image">
+                <div class="blog-post-content">
+                    <p>October 1, 2024</p>
+                    <br>
+                    <h3>Seasonal Cleaning Checklist</h3>
+                    <p>Get organized with our seasonal cleaning checklist to keep your home in top shape all year round.</p>
+                    <a href="#" class="read-more">Read More</a>
+                    <div class="rating">
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9733;</span>
+                        <span class="star">&#9734;</span>
+                        <span class="star">&#9734;</span> 
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    <script src="user_blog.js"></script>
+</body>
+</html>

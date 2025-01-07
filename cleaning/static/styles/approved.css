@@ -1,0 +1,195 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Admin Container Layout */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #FFB300;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background-color: #7a5604;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    margin-left: 250px; /* Sidebar width */
+    padding: 20px;
+}
+
+.main-content header {
+    background-color: #FFB300;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Panel Sections */
+.admin-panel, .totals-container{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.admin-panel h2,
+.total-box h2 {
+    margin-bottom: 20px;
+    color: #FFD167;
+}
+
+/* Totals Section */
+.totals-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.total-box {
+    flex: 1;
+    background-color: #FFD167;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total-box h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+.total-box p {
+    margin-top: 5px;
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Search Input */
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+.user-table tbody tr:nth-child(even),
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.user-table tbody tr:hover,
+tbody tr:hover {
+    background-color: #78756b;
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 5px 15px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.delete-btn {
+    margin-bottom: 5px;
+    background-color: #e74c3c; /* Red for Deny button */
+}
+
+.accept-btn {
+    background-color: #06c923; /* Green for Accept button */
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+/* Dropdowns */
+.user-table select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #FFB300;
+    color: #fff;
+    position: fixed;
+    width: calc(100% - 250px);
+    bottom: 0;
+    left: 250px;
+}

@@ -1,0 +1,153 @@
+/* Base styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Background image and blur effect */
+    background-image: url("{% static 'images/login.jpg'%}"); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Apply a blur filter to the entire background image */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* Adjust the blur value as needed */
+    z-index: -1; /* Send it behind the form container */
+}
+
+/* Form container styling */
+.form-container {
+    background-color: white; /* some transparency to the form background */
+    padding: 50px;
+    padding-right: 5%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 370px;
+    text-align: center;
+    z-index: 1; /* Make sure the form stays on top of the background */
+}
+
+/* Title */
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    font-size: 1em;
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease;
+}
+
+/* Style for Django form widgets */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+/* Django form errors */
+ul.errorlist {
+    color: red;
+    margin-bottom: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+    background-color: #06d143;
+    color: black;
+    border: none;
+    padding: 13px;
+    width: 100%;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Sign up text */
+.signup-text {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.signup-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 400px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    font-size: 1em;
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+}

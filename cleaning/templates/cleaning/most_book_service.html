@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Most Booked Services</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/most_booked.css' %}">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+                    <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+                    <li><a href="{% url 'approved_bookings' %}">Approved Bookings</a></li>
+                    <li><a href="{% url 'most_booked_service' %}" class="active">Most Booked Services</a></li>
+                    <li><a href="{% url 'owner_login' %}">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header>
+                <h1>Most Booked Services</h1>
+            </header>
+            
+            <main>
+                <section class="admin-panel">
+                    <h2>Most Booked Services by Month</h2>
+                    <div class="month-container">
+                        {% for month, services in monthly_data.items %}
+                        <div class="month-box">
+                            <h3>{{ month }}</h3>
+                            <ul>
+                                {% for service, count in services.items %}
+                                <li><strong>{{ service }}:</strong> {{ count }} bookings</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

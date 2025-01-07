@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/deep_dry.css' %}?101">
+</head>
+<body>
+    <header>
+        
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="logo">
+                <h1 class="site-title">Sayago's Cleaning Co.</h1>
+            </div>
+                <ul class="centered-menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home_services' %}">Services</a></li>
+                    <li><a href="{% url 'home_about' %}">About Us</a></li>
+                    <li><a href="{% url 'home_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+ 
+    
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Deep Dry Cleaning</h1>
+            <ul>
+                <li>Most Recommended by over 800 customers</li>
+            </ul>
+        </div>
+        <div class="hero-image-container">
+            <img class="hero-image" src="{% static 'images/services3.jpg' %}" alt="Cleaning Process">
+        </div>
+    </div>
+    
+    <section id="services" class="services-section">
+            <h1 class="section-title">Pamper your Mattress & Sofas
+            </h1>
+            <h2 class="section-subtitle">— Keep them high and dry.
+            </h2>
+            <div class="services-grid">
+                <!-- Existing Services -->
+                <div class="service-card">
+                    <img src="{% static 'images/services3.jpg' %}" alt="Anti-Bacterial Mist Treatment" class="service-image">      
+            </div>
+             <h3>
+                <br>Offering professional deep dry cleaning services<br> which will pamper your mattress & sofas. Keeping
+                <br>them clean, dry vacuumed and scented all the time.
+                <br>Savor the comfort after our vacuum has done the job<br>of treating it with the most delicate dry clean treatment.<br>
+                <br>Deep Dry is best for linen, leather sofa, mattress,<br>and removal of dirt, dustmites, and residue on
+                <br>targeted items or areas of your house. It will take about 1-2 hours <br>of treating time to extract out the dirt and odor.<br> The dry cleaning takes numerous passes from our high technology machine with bespoke nozzle features.<br>
+             </h3>                
+    </section>
+     
+    <script src="{% static 'scripts/user_services.js'%}"></script>
+    
+</body>
+</html>

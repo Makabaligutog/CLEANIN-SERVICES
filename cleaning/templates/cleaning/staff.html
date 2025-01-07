@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-color: #333;
+            --light-text-color: #777;
+            --border-color: #e0e0e0;
+            --hover-color: #e8f0fe;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: white;
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            flex-grow: 1;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-text-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .nav-links i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 0.75rem;
+        }
+
+        .user-info {
+            flex-grow: 1;
+        }
+
+        .user-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            color: var(--light-text-color);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--light-text-color);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            margin-left: 250px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .date {
+            font-size: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+
+        .card .stat {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+        }
+
+        .bookings h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .booking {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .booking:hover {
+            transform: translateX(5px);
+        }
+
+        .booking-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .booking-info p {
+            color: var(--light-text-color);
+            font-size: 0.9rem;
+        }
+
+        
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                margin-bottom: 0.5rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .booking {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .booking-info {
+                margin-bottom: 0.5rem;
+            }
+        }
+        .staff-list {
+            margin-top: 2rem;
+        }
+        
+        .staff {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .staff:hover {
+            transform: translateX(5px);
+        }
+        
+        .staff-avatar {
+            margin-right: 1.5rem;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .staff-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .staff-details {
+            flex-grow: 1;
+        }
+        
+        .staff-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .staff-details p {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+        }
+        
+        /* Add responsiveness for smaller screens */
+        @media (max-width: 768px) {
+            .staff-list {
+                margin-top: 1rem;
+            }
+        
+            .staff {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        
+            .staff-avatar {
+                margin-bottom: 1rem;
+            }
+        
+            .staff-details h3 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>CleanCo</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%url 'ad_dashboard' %}"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"class="active"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"><i class="ri-file-chart-line"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png'%}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username }}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login' %}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="header">
+            <h1>Staff Management</h1>
+            <span class="date">{{ current_date }}</span>
+        </div>
+        <div class="staff-list">
+            <h2>Our Staff</h2>
+    
+            <!-- Staff Profile 1 -->
+            <div class="staff">
+                <div class="staff-avatar">
+                    <img src="{% static 'images/john_doe.jpg' %}" alt="John Doe">
+                </div>
+                <div class="staff-details">
+                    <h3>John Doe</h3>
+                    <p>Age: 34</p>
+                    <p>Address: 123 Elm Street, Springfield</p>
+                </div>
+            </div>
+    
+            <!-- Staff Profile 2 -->
+            <div class="staff">
+                <div class="staff-avatar">
+                    <img src="{% static 'images/jane_smith.jpg' %}" alt="Jane Smith">
+                </div>
+                <div class="staff-details">
+                    <h3>Jane Smith</h3>
+                    <p>Age: 29</p>
+                    <p>Address: 456 Oak Avenue, Greenfield</p>
+                </div>
+            </div>
+    
+            <!-- Staff Profile 3 -->
+            <div class="staff">
+                <div class="staff-avatar">
+                    <img src="{% static 'images/michael_brown.jpg' %}" alt="Michael Brown">
+                </div>
+                <div class="staff-details">
+                    <h3>Michael Brown</h3>
+                    <p>Age: 40</p>
+                    <p>Address: 789 Pine Road, Riverdale</p>
+                </div>
+            </div>
+    
+            <!-- Staff Profile 4 -->
+            <div class="staff">
+                <div class="staff-avatar">
+                    <img src="{% static 'images/emily_davis.jpg' %}" alt="Emily Davis">
+                </div>
+                <div class="staff-details">
+                    <h3>Emily Davis</h3>
+                    <p>Age: 26</p>
+                    <p>Address: 321 Cedar Lane, Maplewood</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

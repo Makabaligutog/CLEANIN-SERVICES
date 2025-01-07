@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'styles/reports.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>CleanCo</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%url 'ad_dashboard' %}"><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"class="active"><i class="ri-file-chart-line"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png' %}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username }}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login' %}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <!-- Services Overview Section -->
+        <div class="background-container">
+            <div class="survey-container">
+                <h2>Services Overview</h2>
+                <!-- Month Selector Form -->
+                <form method="GET" action="{% url 'reports' %}">
+                    <label for="month">Select Month: </label>
+                    <select name="month" id="month" onchange="this.form.submit()">
+                        <option value="1" {% if selected_month == '1' %}selected{% endif %}>January</option>
+                        <option value="2" {% if selected_month == '2' %}selected{% endif %}>February</option>
+                        <option value="3" {% if selected_month == '3' %}selected{% endif %}>March</option>
+                        <option value="4" {% if selected_month == '4' %}selected{% endif %}>April</option>
+                        <option value="5" {% if selected_month == '5' %}selected{% endif %}>May</option>
+                        <option value="6" {% if selected_month == '6' %}selected{% endif %}>June</option>
+                        <option value="7" {% if selected_month == '7' %}selected{% endif %}>July</option>
+                        <option value="8" {% if selected_month == '8' %}selected{% endif %}>August</option>
+                        <option value="9" {% if selected_month == '9' %}selected{% endif %}>September</option>
+                        <option value="10" {% if selected_month == '10' %}selected{% endif %}>October</option>
+                        <option value="11" {% if selected_month == '11' %}selected{% endif %}>November</option>
+                        <option value="12" {% if selected_month == '12' %}selected{% endif %}>December</option>
+                    </select>
+                </form>
+    
+                <div class="chart-container">
+                    <canvas id="services-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Customers Concerns Section -->
+        <div class="background-container">
+            <div class="survey-container">
+                <h2>Customers Concerns</h2>
+                <table class="concerns-table">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Concern Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example row, can be replaced with dynamic data later -->
+                        <tr>
+                            <td>John Doe</td>
+                            <td>johndoe@example.com</td>
+                            <td>Request for residential cleaning on the weekend.</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>janesmith@example.com</td>
+                            <td>Looking for a deep cleaning service for the living room.</td>
+                        </tr>
+                        <!-- More rows can be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('services-chart').getContext('2d');
+            const serviceCounts = {{ service_counts|safe }};
+            const services = Object.keys(serviceCounts);
+            const chartData = Object.values(serviceCounts);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: services, // X-axis labels
+                    datasets: [{
+                        label: 'Service Popularity',
+                        data: chartData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Services'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number of Bookings'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

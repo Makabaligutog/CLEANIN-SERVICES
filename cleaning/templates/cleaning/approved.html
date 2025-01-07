@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings - Sayago Cleaning Inc.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/approved.css' %}?103">
+    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- CSRF token for JavaScript -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+
+</head>
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+    }
+
+    /* Admin Container */
+    .admin-container {
+        display: flex;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+        width: 250px;
+        background-color: #FFB300;
+        color: #fff;
+        padding: 20px;
+        position: fixed;
+        height: 100%;
+    }
+
+    .sidebar h2 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .sidebar nav ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar nav ul li {
+        margin-bottom: 15px;
+    }
+
+    .sidebar nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar nav ul li a:hover,
+    .sidebar nav ul li a.active {
+        background-color: #7a5604;
+    }
+
+    /* Main Content */
+    .main-content {
+        flex-grow: 1;
+        margin-left: 250px;
+        padding: 20px;
+    }
+
+    .main-content header {
+        background-color: #FFB300;
+        color: white;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+        /* Panel Sections */
+        .admin-panel {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .admin-panel h2 {
+            margin-bottom: 20px;
+            color: #FFD167;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        .user-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .user-table tbody tr:hover {
+            background-color: #78756b;
+            color: white;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .action-btn {
+            flex: 1 1 auto; /* Flexible size for responsiveness */
+            min-width: 80px; /* Minimum width */
+            max-width: 150px; /* Maximum width */
+            padding: 10px;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .accept-btn {
+            background-color: #06c923;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Responsive Table */
+        .admin-panel {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            footer {
+                width: 100%;
+            left: 0;
+        }
+
+        .action-btn {
+            width: 100%; /* Full width on smaller screens */
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+</style>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+                    <li><a href="{% url 'manage_users' %}">Manage Users</a></li>
+                    <li><a href="{% url 'ad_approved' %}" class="active">Bookings</a></li>
+                    <li><a href="{% url 'most_booked_service' %}" class="active">Most Booked Services</a></li>
+                    <li><a href="{% url 'owner_login' %}">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <header>
+                <h1>Bookings</h1>
+            </header>
+
+            <main>
+                <div class="totals-container">
+                    <div class="total-box">
+                        <h2 id="total-bookings">{{ total_bookings }}</h2>
+                        <p>Total Bookings</p>
+                    </div>
+                    <div class="total-box">
+                        <a href="{% url 'approved_bookings' %}" style="text-decoration: none; color: inherit;">
+                            <h2 id="approved-bookings">{{ approved_bookings }}</h2>
+                            <p>Approved Bookings</p>
+                        </a>
+                    </div>
+                    
+                    <div class="total-box">
+                        <h2 id="pending-bookings">{{ pending_bookings }}</h2>
+                        <p>Pending Bookings</p>
+                    </div>
+                </div>
+
+                <section class="admin-panel">
+                    <h2>Bookings</h2>
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search by customer name..." onkeyup="searchCustomer()">
+                    </div>
+
+                    <table class="user-table" role="table" aria-label="Bookings Table">
+                        <thead role="rowgroup">
+                            <tr role="row">
+                                <th role="columnheader">Customer ID</th>
+                                <th role="columnheader">Username</th>
+                                <th role="columnheader">Email</th>
+                                <th role="columnheader">First Name</th>
+                                <th role="columnheader">Last Name</th>
+                                <th role="columnheader">Contact Number</th>
+                                <th role="columnheader">Address</th>
+                                <th role="columnheader">Services</th>
+                                <th role="columnheader">Date Booked</th>
+                                <th role="columnheader">Status</th>
+                                <th role="columnheader">Action</th> 
+                            </tr>
+                        </thead>
+                        <tbody id="approved-appointments-table" role="rowgroup">
+                            {% if bookings %}
+                                {% for booking in bookings %}
+                                    <tr data-booking-id="{{ booking.booking_id }}">
+                                        <td>{{ booking.booking_id }}</td>
+                                        <td>{{ booking.user.username }}</td>
+                                        <td>{{ booking.user.email }}</td>
+                                        <td>{{ booking.first_name }}</td>
+                                        <td>{{ booking.last_name }}</td>
+                                        <td>{{ booking.contact_number }}</td>
+                                        <td>{{ booking.address }}</td>
+                                        <td>{{ booking.cleaning_service }}</td>
+                                        <td>{{ booking.booking_date }}</td>
+                                        <td class="status-cell">{{ booking.status }}</td>
+                                        <td>
+                                            <button 
+                                                class="action-btn accept-btn" 
+                                                onclick="handleAction({{ booking.booking_id }}, '{{ booking.first_name}} {{ booking.last_name }}','{{ booking.user.email }}', 'approve')" 
+                                                {% if booking.status != 'pending' %}disabled{% endif %}>
+                                                Approve
+                                            </button>
+                                            <button 
+                                                class="action-btn delete-btn" 
+                                                onclick="handleAction({{ booking.booking_id }},  '{{ booking.first_name}} {{ booking.last_name }}',{{ booking.user.email }}, 'deny')" 
+                                                {% if booking.status != 'pending' %}disabled{% endif %}>
+                                                Deny
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="11">No bookings found.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sayago Cleaning Inc. Admin Dashboard</p>
+    </footer>
+
+    <script src="{% static 'scripts/admin_dash.js' %}"></script>
+    <script>
+        emailjs.init({
+            publicKey: 'LClqy9KpjAqwKZtgQ',
+            // Do not allow headless browsers
+            blockHeadless: true,
+            limitRate: {
+              // Set the limit rate for the application
+              id: 'app',
+              // Allow 1 request per 10s
+              throttle: 10000,
+            },
+          });
+
+        // Totals
+        const totalBookings = {{ total_bookings|default:0 }};
+        const approvedBookings = {{ approved_bookings|default:0 }};
+        const pendingBookings = {{ pending_bookings|default:0 }};
+
+        document.getElementById('total-bookings').textContent = totalBookings;
+        document.getElementById('approved-bookings').textContent = approvedBookings;
+        document.getElementById('pending-bookings').textContent = pendingBookings;
+
+        // Search Functionality
+        function searchCustomer() {
+            const input = document.getElementById('search-input').value.toLowerCase();
+            const rows = document.querySelectorAll('#approved-appointments-table tr');
+
+            rows.forEach(row => {
+                const customerName = row.cells[1]?.textContent.toLowerCase() || '';
+                if (customerName.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // CSRF Token Helper
+        function getCsrfToken() {
+            const metaToken = document.querySelector('meta[name="csrf-token"]');
+            if (!metaToken) {
+                console.error('CSRF token not found!');
+                return '';
+            }
+            return metaToken.content;
+        }
+
+
+        // Approve/Deny Booking
+        function handleAction(bookingId, name, email, action) {
+            const confirmMessage = action === 'approve' 
+                ? 'Are you sure you want to approve this booking?' 
+                : 'Are you sure you want to deny this booking?';
+            if (!confirm(confirmMessage)) return;
+
+            const url = action === 'approve' 
+                ? `/approve-booking/${bookingId}/` 
+                : `/deny-booking/${bookingId}/`;
+
+            var templateParams = {
+                to_name: name,
+                to_email: email,
+                message: action,
+            };
+    
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCsrfToken(),
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (action === 'approve') {
+                    endpoint = `/confirm_booking/${bookingId}/`; 
+    
+                      
+                    emailjs.send('service_r7qlwvc', 'template_wx81izr', templateParams).then(
+                      (response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                      },
+                      (error) => {
+                        console.log('FAILED...', error);
+                      },
+                    );
+                } else if (action === 'deny') {
+                    endpoint = `/deny_booking/${bookingId}/`;
+                    emailjs.send('service_r7qlwvc', 'template_wx81izr', templateParams).then(
+                      (response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                      },
+                      (error) => {
+                        console.log('FAILED...', error);
+                      },
+                    );
+                }
+    
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing the request.');
+            });
+        }
+    </script>
+</body>
+</html>

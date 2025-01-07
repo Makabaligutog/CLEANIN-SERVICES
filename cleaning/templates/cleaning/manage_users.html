@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Sayago Cleaning Inc.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/manage.css' %}?101">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Cleaning Services</h2>
+                <p>Management Dashboard</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="{% url 'admin_homepage' %}">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'manage_users' %}">
+                        <i class="fas fa-users-cog"></i> Manage Users
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#bookings-submenu" class="submenu-toggle">
+                        <i class="fas fa-book"></i> Bookings
+                        <i class="fas fa-chevron-down submenu-icon"></i>
+                    </a>
+                    <ul class="submenu" id="bookings-submenu">
+                        <li><a href="{% url 'manage_users' %}"><i class="fas fa-list"></i> Total Bookings</a></li>
+                        <li><a href="{% url 'approved_bookings' %}"><i class="fas fa-check-circle"></i> Accepted Bookings</a></li>
+                        <li><a href="{% url 'manage_users' %}"><i class="fas fa-times-circle"></i> Denied Bookings</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="#cleaning-submenu" class="submenu-toggle">
+                        <i class="fas fa-broom"></i> Cleaning Services
+                        <i class="fas fa-chevron-down submenu-icon"></i>
+                    </a>
+                    <ul class="submenu" id="cleaning-submenu">
+                        <li><a href="{% url 'manage_users' %}"><i class="fas fa-th-large"></i> Services Group</a></li>
+                        <li><a href="{% url 'most_booked_service' %}"><i class="fas fa-star"></i> Most Booked Services</a></li>
+                    </ul>
+                </li>
+                <hr>
+                <li class="menu-item">
+                    <a href="{% url 'manage_users' %}">
+                        <i class="fas fa-users"></i> Employees
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Manage Users</h1>
+            </header>
+            <main>
+                <section>
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if users %}
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.is_active|yesno:"Active,Inactive" }}</td>
+                                    <td>
+                                        {% comment %} <a href="{% url 'view_user' user.id %}" class="action-btn view-btn">View</a> {% endcomment %}
+                                        <a href="{% url 'edit_user' user.id %}" class="action-btn edit-btn">Edit</a>
+                                        {% comment %} <form method="POST" action="{% url 'delete_user' user.id %}"> {% endcomment %}
+                                            {% csrf_token %}
+                                            <button type="submit" class="action-btn delete-btn">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">No users found.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.submenu-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                toggle.classList.toggle('active');
+                const submenu = toggle.nextElementSibling;
+                if (submenu) {
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

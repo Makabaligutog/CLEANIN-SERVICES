@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busy Bee Cleaning Co.</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user_about.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo-title-container">
+                <img src="{% static 'images/logo1.png' %}" class="logo" alt="Busy Bee Logo">
+                <h1 class="site-title">Sayago's Cleaning Services</h1>
+            </div>
+            <ul class="centered-menu">
+                <li><a href="{% url 'admin_homepage' %}">Home</a></li>
+                <li><a href="{% url 'ad_services' %}">Services</a></li>
+                <li><a href="{% url 'ad_about' %}">About Us</a></li>
+                <li><a href="{% url 'ad_blog' %}">Blog</a></li> 
+            </ul>
+        </nav>
+        <img src="{% static 'images/icon.jpg' %}" class="profile-icon" alt="Profile" onclick="toggleSidebar()">
+
+    </header>
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+        <a href="{% url 'ad_dashboard' %}">Admin Dashboard</a>
+        {% comment %} <a href="#"></a>
+        <a href="loginAdmin.html">Logout</a> {% endcomment %}
+    </div>
+    <section class="hero"></section>
+        <div class="hero-text">
+            <h1>Professional Cleaning Services</h1>
+            <p>Experience the best in cleaning for your home or business.</p>
+            <!-- para contact form(unta) nga button -->
+            <!--<a href="#" class="cta-btn">Get a Free Quote</a> --> 
+        </div>
+    </section>
+
+    <!-- "Why Choose Us" Section -->
+    <section class="why-choose-us">
+        <h2>Why Choose ClearView?</h2>
+        <div class="benefits">
+            <div class="benefit-item">
+                <h3>Reliable Services</h3>
+                <p>We provide dependable, high-quality cleaning services, ensuring customer satisfaction.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Trained Professionals</h3>
+                <p>Our team consists of highly trained cleaners who meet the highest standards.</p>
+            </div>
+            <div class="benefit-item">
+                <h3>Eco-Friendly Solutions</h3>
+                <p>We use environmentally friendly cleaning products that are safe for you and your family.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedbacks Section -->
+    <section class="feedback">
+        <h2>What Our Clients Say</h2>
+        <div class="feedback-item">
+            <p>"ClearView transformed my home! Highly recommend their service!"</p>
+            <span>- Mharion S.</span>
+        </div>
+        <div class="feedback-item">
+            <p>"Professional and reliable. Great service every time!"</p>
+            <span>- Jay P.</span>
+        </div>
+    </section>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        }
+        
+        // Toggle Modal
+        function toggleModal() {
+            const modal = document.getElementById("bookingModal");
+            modal.style.display = modal.style.display === "block" ? "none" : "block";
+        }
+        
+        // Close Modal when clicking the 'x' or outside of the modal
+        document.getElementById("closeModal").onclick = function() {
+            toggleModal();
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById("bookingModal");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Form Submission
+        document.getElementById("bookingForm").onsubmit = function(event) {
+            event.preventDefault(); // Prevent form from submitting traditionally
+            const thankYouMessage = document.getElementById("thankYouMessage");
+            thankYouMessage.style.display = "block";
+            setTimeout(() => {
+                thankYouMessage.style.display = "none";
+                toggleModal(); // Close modal after showing thank you message
+            }, 3000); // Hide message after 3 seconds
+        }
+        
+        // Book Now button opens the modal
+        document.getElementById("bookNowBtn").onclick = function() {
+            toggleModal();
+        }
+        
+        
+    </script>
+</body>
+</html>

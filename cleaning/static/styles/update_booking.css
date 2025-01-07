@@ -1,0 +1,107 @@
+/* Basic styling for update booking page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.update-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.update-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #4cae4c;
+}
+
+.cancel-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #c9302c;
+}
+/* Styling for the pop-out success message */
+.popup-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50px); /* Start position is off-screen */
+    background-color: #4CAF50; /* Green background for success */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.5s ease;
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+/* Optionally, you can customize the error message style */
+.popup-message.error {
+    background-color: #f44336; /* Red background for errors */
+}
+
+/* Styling for the message close button (optional) */
+.popup-message span {
+    display: block;
+    text-align: center;
+}
