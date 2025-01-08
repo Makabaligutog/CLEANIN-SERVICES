@@ -6,7 +6,7 @@
     <title>Blog</title>
     {% load static %}
 
-    <link rel="stylesheet" href="{% static 'styles/user_blog.css' %}?101">
+    <link rel="stylesheet" href="{% static 'styles/user_blog.css' %}?106">
 </head>
 <body>
     <header>
@@ -36,7 +36,7 @@
             <h2>Blog Posts</h2>
             <div class="blog-grid">
                 <div class="blog-card">
-                    <img src="{% static 'images/services1.jpg'%}" alt="Tips for a Cleaner Home" class="blog-image">
+                    <img src="{% static 'images/1.png'%}" alt="Tips for a Cleaner Home" class="blog-image">
                     <div class="blog-content">
                         <p class="blog-date">February 11, 2024</p>
                         <h3>Tips for a Cleaner Home</h3>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="blog-card">
-                    <img src="Blog/professional.jpg" alt="Importance of Professional Cleaning" class="blog-image">
+                    <img src="{% static 'images/2.jpg'%}" alt="Importance of Professional Cleaning" class="blog-image">
                     <div class="blog-content">
                         <p class="blog-date">March 20, 2024</p>
                         <h3>The Importance of Professional Cleaning</h3>
@@ -73,20 +73,6 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="wide-blog-grid">
-        <h1>Newly Uploaded Blogs</h1>
-        {% for post in posts %}
-            <div class="blog-card">
-                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image">
-                <div class="blog-content">
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.created_at|date:"F d, Y" }}</p>
-                    <p>{{ post.content|truncatewords:30 }}</p>
-                    <a href="#" class="read-more">Read More</a>
-                </div>
-            </div>
-        {% endfor %}
     </section>
     
         <script src="user_blog.js"></script>
