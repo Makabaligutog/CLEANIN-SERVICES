@@ -780,7 +780,7 @@ def admin_dashboard(request):
 #admin booking page
 def admin_booking(request):
     bookings_list = Booking.objects.all()  # Replace with your Booking model/query
-    paginator = Paginator(bookings_list, 10)  # Show 10 bookings per page
+    paginator = Paginator(bookings_list, 20)  # Show 10 bookings per page
     page_number = request.GET.get('page')
     bookings = paginator.get_page(page_number)
     total_bookings = Booking.objects.count()
