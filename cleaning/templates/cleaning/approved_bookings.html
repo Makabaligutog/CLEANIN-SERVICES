@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,7 @@
             <main>
                 <section class="admin-panel">
                     <h2>Approved Bookings</h2>
-                    <a href="{% url 'ad_approved' %}" class="btn">Back to Bookings</a>
+                    <a href="{% url 'admin_booking' %}" class="btn">Back to Bookings</a>
                     <table class="user-table" role="table" aria-label="Approved Bookings Table">
                         <thead role="rowgroup">
                             <tr role="row">
@@ -84,5 +84,101 @@
     </footer>
 
     <script src="{% static 'scripts/admin_dash.js' %}"></script>
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>Cleaning Services Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/approved.css' %}?102"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ri-spray-bottle-fill"></i>
+            <span>ClearView Cleaning<span> Services</span>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{%url 'ad_dashboard' %}" ><i class="ri-dashboard-line"></i> Dashboard</a></li>
+                <li><a href="{% url 'schedule'%}" ><i class="ri-calendar-todo-line"></i> Schedules</a></li>
+                <li><a href="{%url 'user_manage' %}"><i class="ri-customer-service-2-line"></i> Manage Users</a></li>
+                <li><a href="{%url 'admin_booking' %}" class="active"><i class="ri-calendar-todo-line"></i> Bookings</a></li>
+                <li><a href="{%url 'ratings' %}"><i class="ri-service-line"></i> Services</a></li>
+                <li><a href="{% url 'staf'%}"><i class="ri-team-line"></i> Staff</a></li>
+                <li><a href="{% url 'reports'%}"><i class="ri-file-chart-line"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <img src="{% static 'images/icon2.png'%}" alt="User Avatar" class="user-avatar">
+            <div class="user-info">
+                <div class="user-name">{{ request.user.username}}</div>
+                <div class="user-role">Admin</div>
+            </div>
+            <a href="{% url 'owner_login'%}" title="Logout">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+            </a>
+        </div>
+    </aside>
+    <div class="main-content">
+        <header>
+            <h1>Approved Bookings</h1>
+        </header>
+
+        <main>
+            <section class="admin-panel">
+                <h2>Approved Bookings</h2>
+                <a href="{% url 'admin_booking' %}" class="btn">Back to Bookings</a>
+                <table class="user-table" role="table" aria-label="Approved Bookings Table">
+                    <thead role="rowgroup">
+                        <tr role="row">
+                            <th>Customer ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Contact Number</th>
+                            <th>Address</th>
+                            <th>Services</th>
+                            <th>Date Booked</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="approved-appointments-table" role="rowgroup">
+                        {% if bookings %}
+                            {% for booking in bookings %}
+                                {% if booking.status == 'approved' %}
+                                    <tr data-booking-id="{{ booking.booking_id }}">
+                                        <td>{{ booking.booking_id }}</td>
+                                        <td>{{ booking.user.username }}</td>
+                                        <td>{{ booking.user.email }}</td>
+                                        <td>{{ booking.first_name }}</td>
+                                        <td>{{ booking.last_name }}</td>
+                                        <td>{{ booking.contact_number }}</td>
+                                        <td>{{ booking.address }}</td>
+                                        <td>{{ booking.cleaning_service }}</td>
+                                        <td>{{ booking.booking_date }}</td>
+                                        <td class="status-cell">{{ booking.status }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="10">No approved bookings found.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    
 </body>
 </html>

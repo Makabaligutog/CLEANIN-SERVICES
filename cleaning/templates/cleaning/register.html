@@ -110,7 +110,7 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-left: 29px;
+            margin-left: 2px;
         }
 
         .submit-btn:hover {
@@ -143,6 +143,59 @@
                 display: none;
             }
         }
+        
+.error {
+    background-color: #03d14e;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.success {
+    background-color: #03d14e;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}
+
+.error {
+    background-color:rgb(228, 23, 23);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}
+.success {
+    background-color:rgb(228, 23, 23);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}
+ 
     </style>
 </head>
 <body>
@@ -163,12 +216,17 @@
             <h2>Create Your Account</h2>
 
             {% if messages %}
-            <div class="error-messages">
+            {% comment %} <div class="error-messages"> {% endcomment %}
                 {% for message in messages %}
-                <p>{{ message }}</p>
+                {% if 'success' in message.tags %}
+                    <p class="success">{{ message }}</p>
+                {% else %}
+                    <p class="error">{{ message }}</p>
+                {% endif %}
                 {% endfor %}
-            </div>
+            {% comment %} </div> {% endcomment %}
             {% endif %}
+
 
             <div class="form-group">
                 <i class="fas fa-user"></i>

@@ -76,27 +76,45 @@ def login_view(request):
 #, {'entered_username': entered_username}
 # User Registration View
 def signup_view(request):
+    print('signup submit')
     if request.method == 'POST':
         form = RegisterForm(request.POST)
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        pass1 = request.POST.get('password1')
+        pass2 = request.POST.get('password2')
+        
+        if pass1!=pass2:
+            messages.error(request, 'Password did not Match! ')
+            
+                # Check if the username already exists
+        if User.objects.filter(username=username).exists():
+            print('This username is already taken.')
+            messages.error(request, 'This username is already taken.')
+                
+            # form.add_error('username', 'This username is already taken.')
+            return render(request, 'cleaning/register.html', {'form': form})
+        
+        
+
+        # Check if the email already exists
+        if User.objects.filter(email=email).exists():
+            form.add_error('email', 'This email is already registered.')
+            messages.error(request, 'This email is already registered.')
+
+            return render(request, 'cleaning/register.html', {'form': form})
+        
         if form.is_valid():
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             
-            # Check if the username already exists
-            if User.objects.filter(username=username).exists():
-                form.add_error('username', 'This username is already taken.')
-                return render(request, 'cleaning/register.html', {'form': form})
-
-            # Check if the email already exists
-            if User.objects.filter(email=email).exists():
-                form.add_error('email', 'This email is already registered.')
-                return render(request, 'cleaning/register.html', {'form': form})
-
             # If validation passes, save the user and log them in
             user = form.save()
             login(request, user)  # Log the user in after registration
             messages.success(request, 'Registration successful.')
             return redirect('login')  # Redirect to a relevant page (e.g., profile, home)
+        else:
+            print(form.errors)
     else:
         form = RegisterForm()
     return render(request, 'cleaning/register.html', {'form': form})
@@ -156,6 +174,9 @@ def create_booking(request):
         except ValueError:
             return JsonResponse({"error": "Invalid booking date format. Please use YYYY-MM-DD."}, status=400)
         
+        if Booking.objects.filter(user=request.user, status='approved').exists():
+                return JsonResponse({"error": "You already have an active approved booking. Please cancel it before making a new one."}, status=400)
+
         
         if booking_date < today:
             return JsonResponse({"error": "Booking date cannot be in the past. Please select a valid future date."}, status=400)
@@ -237,6 +258,7 @@ def profile_view(request):
     return render(request, 'cleaning/user_profile.html', {'booking': booking})
 
 # Update Booking View
+from django.utils.timezone import now
 @method_decorator(login_required, name='dispatch')
 class BookingUpdateView(UpdateView):
     model = Booking
@@ -246,19 +268,42 @@ class BookingUpdateView(UpdateView):
 
     def get_queryset(self):
         return Booking.objects.filter(user=self.request.user)
+
     def form_valid(self, form):
-        # Call the parent class's form_valid method to save the form
+        # Validate booking_date is not in the past
+        booking_date = form.cleaned_data.get('booking_date')
+        if booking_date and booking_date < now().date():
+            messages.error(self.request, "Booking date cannot be in the past.")
+            return self.form_invalid(form)
+
+        # Validate first_name
+        first_name = form.cleaned_data.get('first_name')
+        if not first_name.isalpha():
+            messages.error(self.request, "First name must contain only alphabetic characters.")
+            return self.form_invalid(form)
+
+        # Validate last_name
+        last_name = form.cleaned_data.get('last_name')
+        if not last_name.isalpha():
+            messages.error(self.request, "Last name must contain only alphabetic characters.")
+            return self.form_invalid(form)
+
+        # Validate contact_number
+        contact_number = form.cleaned_data.get('contact_number')
+        if not re.match(r'^\+?\d{7,15}$', contact_number):
+            messages.error(self.request, "Enter a valid contact number (7-15 digits, with optional '+').")
+            return self.form_invalid(form)
+
+        # If all validations pass, proceed with saving
         response = super().form_valid(form)
-        
-        # Add a success message
         messages.success(self.request, "Your booking has been updated successfully!")
         return response
 
-    def form_invalid(self, form):
-        # Optionally add a message if the form is invalid
-        messages.error(self.request, "There was an error updating your booking. Please check the form.")
-        return super().form_invalid(form)
-
+    # def form_invalid(self, form):
+    #     # Optionally add a generic error message
+    #     messages.error(self.request, "There was an error updating your booking. Please check the form.")
+    #     return super().form_invalid(form)
+    
 # Delete Booking View
 @method_decorator(login_required, name='dispatch')
 class BookingDeleteView(DeleteView):
@@ -367,10 +412,10 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-# User Homepage
 def user_home(request):
-    # services = Service.objects.all()
     return render(request, 'cleaning/u-index.html')
+# User Homepage
+
     
 # User Services Page
 def services(request):
@@ -836,12 +881,22 @@ def confirm_booking(request, booking_id):
 #             return JsonResponse({'success': False, 'message': f'Error: {str(e)}'})
 #     return JsonResponse({'success': False, 'message': 'Invalid request method.'})
 #admin manage users page
+@login_required
 def user_manage(request):
     query = request.GET.get('query', '')
     users = User.objects.filter(is_staff=False, username__icontains=query).order_by('id')
     paginator = Paginator(users, 10)
     page_number = request.GET.get('page')
     users_page = paginator.get_page(page_number)
+
+    if request.method == 'POST' and 'delete_user' in request.POST:
+        user_id = request.POST.get('user_id')
+        try:
+            user = User.objects.get(id=user_id)
+            user.delete()
+            messages.success(request, f"User {user.username} deleted successfully.")
+        except User.DoesNotExist:
+            messages.error(request, "User not found.")
 
     context = {
         'users': users_page,
@@ -850,12 +905,17 @@ def user_manage(request):
     }
     return render(request, 'cleaning/users.html', context)
 #under the manage user page 
+@login_required
 def delete_user(request, user_id):
     if request.method == "POST":
-        user = get_object_or_404(User, id=user_id)
-        user.delete()
-        messages.success(request, "User deleted successfully.")
-        return JsonResponse({"success": True, "message": "User deleted successfully."})
+        try:
+        
+            user = User.objects.get(id=user_id)
+            user.delete()
+            messages.success(request, "User deleted successfully.")
+            return JsonResponse({"success": True, "message": "User deleted successfully."})
+        except User.DoesNotExist:
+            return JsonResponse({"success": False, "message": "User not found."}, status=404)
     return JsonResponse({"success": False, "message": "Invalid request method."}, status=400)
 
 def staffs(request):
@@ -963,19 +1023,19 @@ def schedule(request):
     })
 
 #submit ratings
-def submit_rating(request):
-    if request.method == "POST":
-        # Handle rating submission logic
-        service = request.POST.get('service')
-        rating = request.POST.get('rating')
-        feedback = request.POST.get('feedback')
+# def submit_rating(request):
+#     if request.method == "POST":
+#         # Handle rating submission logic
+#         service = request.POST.get('service')
+#         rating = request.POST.get('rating')
+#         feedback = request.POST.get('feedback')
 
-        # Save to database or perform other logic
-        # Example:
-        # ServiceRating.objects.create(service=service, rating=rating, feedback=feedback)
+#         # Save to database or perform other logic
+#         # Example:
+#         # ServiceRating.objects.create(service=service, rating=rating, feedback=feedback)
 
-        return JsonResponse({'success': True, 'message': 'Rating submitted successfully.'})
-    return JsonResponse({'success': False, 'error': 'Invalid request method.'})
+#         return JsonResponse({'success': True, 'message': 'Rating submitted successfully.'})
+#     return JsonResponse({'success': False, 'error': 'Invalid request method.'})
 
 
 from django.urls import reverse 
@@ -1022,3 +1082,31 @@ def submit_feedback(request):
         form = FeedbackForm()
 
     return render(request, 'cleaning/u-about.html', {'form': form})
+
+# # rating sa services ug feedbacks
+# from .forms import RatingForm
+# from .models import Rating
+# @login_required
+# def submit_rating(request):
+#     if request.method == 'POST':
+#         service = request.POST.get('service')
+#         rating = request.POST.get('rating')
+#         feedback = request.POST.get('feedback')
+
+#         # Save the rating and feedback
+#         Rating.objects.create(
+#             user=request.user,
+#             service=service,
+#             rating=rating,
+#             feedback=feedback
+#         )
+
+#         messages.success(request, 'Thank you for your feedback!')
+#         return redirect('user_services')  # Replace 'service_page' with your desired redirect URL
+
+#     return redirect('user_services')  # Replace 'home' with your desired fallback URL
+
+
+# def display_ratings(request):
+#     ratings = Rating.objects.all()
+#     return render(request, 'cleaning/u-services.html', {'ratings': ratings})

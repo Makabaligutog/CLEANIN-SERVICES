@@ -94,7 +94,9 @@ urlpatterns = [
     path('Schedule_Of_Bookings', views.schedule, name='schedule'),
     path('Privacy_And_Policy/', views.policy, name='policy'),
     path('check-booking/<str:service_name>/', check_booking, name='check_booking'),
-    path('submit-rating/', views.submit_rating, name='submit_rating'),
+    # path('submit_rating/', views.submit_rating, name='submit_rating'),
+    # path('service-ratings/<str:service_name>/', views.service_ratings, name='service_ratings'),
+
      #submit feedback
     path('submit_feedback/', views.submit_feedback, name='submit_feedback'),  
 

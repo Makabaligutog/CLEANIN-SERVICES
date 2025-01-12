@@ -51,3 +51,13 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ['name', 'email', 'message']
+        
+
+# class RatingForm(forms.ModelForm):
+#     class Meta:
+#         model = Rating
+#         fields = ('service', 'rating', 'feedback')
+#         widgets = {
+#             'service': forms.HiddenInput(),
+#         }
+

@@ -99,7 +99,7 @@ input:focus {
 }
 
 .error-messages {
-    background-color: #F56565;
+    background-color: #03d14e;
     color: white;
     padding: 15px;
     border-radius: 10px;

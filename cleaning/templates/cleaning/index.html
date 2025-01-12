@@ -9,7 +9,7 @@
     {% load static %}
 
     <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="{% static 'styles/index.css' %}?107">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}?108">
 </head>
 <body>
     <header>
@@ -40,13 +40,26 @@
             <a href="{% url 'login' %}" class="login-btn" id="login-btn">Book Now</a>
         </div>
     </main>
+    <!-- "What Our Clients Say" Section -->
+    <section class="feedback-section">
+        <h2>What Our Clients Say</h2>
+        <div class="feedback-container">
+            <button id="prev-btn" class="nav-btn" onclick="navigateFeedback('prev')">&lt;</button>
+            
+            <div id="feedback-content" class="feedback-message">
+                <!-- The current feedback message will be displayed here -->
+            </div>
+
+            <button id="next-btn" class="nav-btn" onclick="navigateFeedback('next')">></button>
+        </div>
+    </section>
 
     <!-- More Cleaning Services Section -->
     <section class="services-section">
         <h2>Our Cleaning Services</h2>
         <div class="service-container">
             <div class="service-item">
-                <img src="{% static 'images/residential_cleaning.jpg' %}" alt="Residential Cleaning" class="service-image">
+                <img src="{% static 'images/services7.jpg' %}" alt="Residential Cleaning" class="service-image">
                 <h3>Residential Cleaning</h3>
                 <p>
                     Whether you're looking for a thorough deep clean or a regular maintenance cleaning, 
@@ -56,7 +69,7 @@
                 </p>
             </div>
             <div class="service-item">
-                <img src="{% static 'images/commercial_cleaning.jpg' %}" alt="Commercial Cleaning" class="service-image">
+                <img src="{% static 'images/services8.jpg' %}" alt="Commercial Cleaning" class="service-image">
                 <h3>Commercial Cleaning</h3>
                 <p>
                     We understand the importance of maintaining a clean and professional environment. 
@@ -66,7 +79,7 @@
                 </p>
             </div>
             <div class="service-item">
-                <img src="{% static 'images/carpet_cleaning.jpg' %}" alt="Carpet and Upholstery Cleaning" class="service-image">
+                <img src="{% static 'images/services0.jpg' %}" alt="Carpet and Upholstery Cleaning" class="service-image">
                 <h3>Carpet & Upholstery Cleaning</h3>
                 <p>
                     Our advanced carpet and upholstery cleaning services help remove deep stains, dirt, and allergens. 
@@ -75,7 +88,7 @@
                 </p>
             </div>
             <div class="service-item">
-                <img src="{% static 'images/window_washing.jpg' %}" alt="Window Washing" class="service-image">
+                <img src="{% static 'images/services11.jpg' %}" alt="Window Washing" class="service-image">
                 <h3>Window Washing</h3>
                 <p>
                     Say goodbye to streaky windows! We provide expert window cleaning services for both residential and 
@@ -94,19 +107,7 @@
         </div>
     </section>
 
-    <!-- "What Our Clients Say" Section -->
-    <section class="feedback-section">
-        <h2>What Our Clients Say</h2>
-        <div class="feedback-container">
-            <button id="prev-btn" class="nav-btn" onclick="navigateFeedback('prev')">&lt;</button>
-            
-            <div id="feedback-content" class="feedback-message">
-                <!-- The current feedback message will be displayed here -->
-            </div>
-
-            <button id="next-btn" class="nav-btn" onclick="navigateFeedback('next')">></button>
-        </div>
-    </section>
+    
 
     <!-- Include your JS file -->
     <script src="{% static 'scripts/index.js' %}?100"></script>

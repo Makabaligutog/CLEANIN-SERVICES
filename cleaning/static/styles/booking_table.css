@@ -22,6 +22,7 @@
     line-height: 1.6;
     display: flex;
     min-height: 100vh;
+    overflow-x: hidden;
   }
   
   .sidebar {
@@ -301,7 +302,7 @@
 
     .admin-panel h2 {
         margin-bottom: 20px;
-        color: #FFD167;
+        color: #000000;
     }
 
     /* Tables */
@@ -368,8 +369,11 @@
     /* Responsive Table */
     .admin-panel {
         overflow-x: auto;
+        display: flex;
+        width: 65%;
+        flex-direction: column;
     }
-
+    
     @media (max-width: 768px) {
         .sidebar {
             position: relative;

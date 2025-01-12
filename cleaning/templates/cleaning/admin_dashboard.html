@@ -56,10 +56,14 @@
               <p>Total bookings in the system</p>
           </div>
           <div class="card">
-              <h2>Approved Bookings</h2>
-              <div class="stat">{{ approved_bookings }}</div>
-              <p>Bookings that have been approved</p>
-          </div>
+            <h2>Approved Bookings</h2>
+            <div class="stat">{{ approved_bookings }}</div>
+            <p>Bookings that have been approved</p>
+        
+            <!-- Button for redirection -->
+            <a href="{% url 'approved_bookings' %}" class="btn btn-primary">View Approved Bookings</a>
+        </div>
+        
           <div class="card">
               <h2>Pending Bookings</h2>
               <div class="stat">{{ pending_bookings }}</div>

@@ -54,7 +54,7 @@
                                 <h3>Residential Cleaning</h3>
                                 <p>Expert cleaning for your home, covering every room to ensure a spotless, fresh living space.</p>
                                 <button class="book-now-btn" data-service="residential">Book Now</button>
-                                <button class="rate-now-btn"  data-service="residential">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                                 <h3>Commercial Cleaning</h3>
                                 <p>Professional cleaning services for offices, retail spaces, and other commercial properties to keep your work environment pristine.</p>
                                 <button class="book-now-btn" data-service="commercial">Book Now</button>
-                                <button class="rate-now-btn" data-service="commercial">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                 <h3>Move-in/Move-out Cleaning</h3>
                                 <p>Specialized cleaning services to make your transition in or out of a home seamless and stress-free.</p>
                                 <button class="book-now-btn" data-service="move_in_move_out">Book Now</button>
-                                <button class="rate-now-btn" data-service="move_in_move_out">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 <h3>Carpet Cleaning</h3>
                                 <p>Our carpet cleaning services refresh your carpets, removing dirt, stains, and allergens for a healthier home.</p>
                                 <button class="book-now-btn" data-service="carpet">Book Now</button>
-                                <button class="rate-now-btn" data-service="carpet">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                 <h3>Window Cleaning</h3>
                                 <p>Efficient window cleaning services that leave your windows crystal clear and streak-free.</p>
                                 <button class="book-now-btn" data-service="window">Book Now</button>
-                                <button class="rate-now-btn" data-service="window">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                                 <h3>Anti-Bacterial Mist Treatment</h3>
                                 <p>Always best after deep cleaning service to complete the whole process with 360-degree cleaning. Best for killing germs and bacteria within the area. Bacteria that can cause you flu, asthma, and allergies.</p>
                                 <button class="book-now-btn" data-service="anti_bacterial">Book Now</button>
-                                <button class="rate-now-btn" data-service="anti_bacterial">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                                 <h3>Car Interior Detailing</h3>
                                 <p>Detailing a car interior involves a deep cleaning of the car's cabin. Various materials, high-technology machines, and patented solutions have been used on vehicle interiors to give it its revamped look and new aroma.</p>
                                 <button class="book-now-btn" data-service="car_interior">Book Now</button>
-                                <button class="rate-now-btn" data-service="car_interior">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                 <h3>Deep Dry Cleaning</h3>
                                 <p>Keep your mattress/sofas clean, dry vacuumed, and scented all the time. Savor the comfort each time. Best for linen/leather sofa, mattress, and removal of dirt, mites, and residue on targeted areas.</p>
                                 <button class="book-now-btn" data-service="deep_dry">Book Now</button>
-                                <button class="rate-now-btn" data-service="deep_dry">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                 <h3>Deep Home Cleaning</h3>
                                 <p>In a nutshell, almost every nook and cranny of your home will get special attention with an extensive routine of deep cleaning, from sweeping, brooming, and vacuuming of floors, wiping of areas.</p>
                                 <button class="book-now-btn" data-service="deep_home">Book Now</button>
-                                <button class="rate-now-btn" data-service="deep_home">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                 <h3>Deep Upholstery Shampooing</h3>
                                 <p>Don’t let the dirt cling to your sofas/mattresses. It’s time to shampoo those long-due stains and marks. Involves shampooing and application of effective and efficient cleaning solutions in targeted areas.</p>
                                 <button class="book-now-btn" data-service="deep_upholstery">Book Now</button>
-                                <button class="rate-now-btn" data-service="deep_upholstery">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                                 <h3>Superior Steam Sterilization</h3>
                                 <p>Pamper your home and fabrics with the most traditional way of removing stubborn dirt within cloth and even germs. It is very effective when bed bugs are on the surfaces of items and can be effective up to 3/4" into fabrics surfaces.</p>
                                 <button class="book-now-btn" data-service="sterilization">Book Now</button>
-                                <button class="rate-now-btn" data-service="sterilization">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                                 <h3>Eco-friendly Green Cleaning</h3>
                                 <p>We use environmentally safe cleaning products to ensure your home is clean and healthy without harmful chemicals.</p>
                                 <button class="book-now-btn" data-service="eco-friendly">Book Now</button>
-                                <button class="rate-now-btn" data-service="eco-friendly">Rate Now</button>
+                                
 
                             </div>
                         </div>
@@ -221,14 +221,14 @@
         </div>
     </div>
     {% comment %} rating section {% endcomment %}
-    <div class="wrapper">
+    {% comment %} <div class="wrapper">
         <div id="ratingModal" class="modal">
             <div class="modal-content">
                 <span id="closeRatingModal" class="close-btn">&times;</span>
                 <h2>Rate This Service</h2>
                 <form id="ratingForm" method="POST" action="{% url 'submit_rating' %}">
                     {% csrf_token %}
-                    <input type="hidden" id="service" name="service" value="">
+                    <input type="hidden" id="service" name="service" value="{{ service_name }}">
                     <div class="star-rating">
                         <input type="radio" id="star5" name="rating" value="5" required>
                         <label for="star5" class="fas fa-star"></label>
@@ -254,7 +254,7 @@
         </div>
     
     
-    
+     {% endcomment %}
     <!-- Thank You Notification -->
     <div class="thank-you-notification" id="thankYouNotification">
         Thank you for your feedback!
@@ -305,27 +305,7 @@
                 }
             });
 
-            ratingForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-
-                const formData = new FormData(ratingForm);
-                try {
-                    const response = await fetch("{% url 'submit_rating' %}", {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    const data = await response.json();
-
-                    if (data.success) {
-                        ratingSuccessMessage.style.display = 'block';
-                    } else {
-                        // Handle error (e.g., display an error message)
-                    }
-                } catch (error) {
-                    // Handle error (e.g., display an error message)
-                }
-            });
+            
         });
         
     document.addEventListener('DOMContentLoaded', () => {

@@ -154,6 +154,43 @@
                     display: none;
                 }
             }
+            
+.error-messages {
+    background-color:rgb(225, 16, 16);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}
+
+.success {
+    background-color: #03d14e;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.error {
+    background-color:rgb(225, 36, 36);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}
     </style>
 </head>
 <body>
@@ -172,12 +209,17 @@
             {% csrf_token %}
             <h2>Login</h2>
             {% if messages %}
-            <div class="error-messages">
+            {% comment %} <div class="error-messages"> {% endcomment %}
                 {% for message in messages %}
-                <p class="error">{{ message }}</p>
+                {% if 'success' in message.tags %}
+                    <p class="success">{{ message }}</p>
+                {% else %}
+                    <p class="error">{{ message }}</p>
+                {% endif %}
                 {% endfor %}
-            </div>
+            {% comment %} </div> {% endcomment %}
             {% endif %}
+
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" id="username" name="username" placeholder="Enter your username" value="{{ entered_username }}" required>

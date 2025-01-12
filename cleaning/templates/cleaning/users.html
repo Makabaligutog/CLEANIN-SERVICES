@@ -13,7 +13,7 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="ri-spray-bottle-fill"></i>
-            <span>CleanCo</span>
+            <span>ClearView Cleaning Services</span>
         </div>
         <nav>
             <ul class="nav-links">
@@ -102,9 +102,11 @@
                 fetch(`/delete_user/${userId}/`, {
                     method: "POST",
                     headers: {
-                        "X-CSRFToken": getCookie("csrftoken"),
+                      "X-CSRFToken": getCookie("csrftoken"),
                     },
-                })
+                    body: JSON.stringify({ csrfmiddlewaretoken: getCookie("csrftoken") }),
+                  })
+                  
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {

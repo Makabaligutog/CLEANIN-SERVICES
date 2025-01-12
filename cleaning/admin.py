@@ -14,4 +14,14 @@ class BookingAdmin(admin.ModelAdmin):
 admin.site.register(Booking, BookingAdmin)
 
 
+# class RatingAdmin(admin.ModelAdmin):
+#     list_display = [
+            
+#             'service',
+#             'rating', 
+#             'feedback',
+#             'submitted_at'
+#     ]
+# admin.site.register(Rating, RatingAdmin)
+
 
